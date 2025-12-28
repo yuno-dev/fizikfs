@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suret Xəlilov | Fizik FS</title>
+    
+    <link rel="shortcut icon" href="logo.jpeg" type="image/x-icon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body { 
+            background-color: #0b0f1a; 
+            color: white; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+        }
+        section { scroll-margin-top: 100px; }
+        .hero-gradient { background: radial-gradient(circle at top right, #1e293b, #0b0f1a); }
+        .glass-effect { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); }
+
+        /* LOQO ÜÇÜN ÖZƏL CSS (Zoom və Dairəvi) */
+        .nav-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%; /* Tam dairəvi edir */
+            object-fit: cover;  /* Mərkəzə doğru zoom edir və kəsir */
+            object-position: center;
+            border: 2px solid #3b82f6;
+        }
+
+        /* Profil Şəkli Hover */
+        .profile-wrapper { 
+            overflow: hidden; 
+            border-radius: 2rem; 
+            border: 4px solid #3b82f6; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .profile-wrapper img { 
+            transition: transform 0.5s ease; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
+        .profile-wrapper:hover img { transform: scale(1.1); }
+
+        .v-card { background: #111827; border: 1px solid #1f2937; transition: 0.3s; }
+        .v-card:hover { border-color: #3b82f6; transform: translateY(-5px); }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 glass-effect border-b border-gray-800 p-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="logo.jpeg" alt="Logo" class="nav-logo">
+                <div class="text-2xl font-black italic tracking-tighter">
+                    <span class="text-white">SURET</span> <span class="text-blue-500">XƏLİLOV</span>
+                </div>
+            </div>
+            <div class="hidden md:flex space-x-8 font-bold text-xs uppercase tracking-widest">
+                <a href="#haqqimda" class="hover:text-blue-400 transition">Haqqımda</a>
+                <a href="#dersler" class="hover:text-blue-400 transition">Dərslər</a>
+                <a href="#hazirliq" class="hover:text-blue-400 transition">Hazırlıq</a>
+                <a href="#elaqe" class="hover:text-blue-400 transition">Əlaqə</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="haqqimda" class="pt-40 pb-24 px-6 hero-gradient">
+        <div class="container mx-auto flex flex-col md:flex-row items-center gap-12">
+            <div class="md:w-1/3 flex justify-center">
+                <div class="profile-wrapper w-72 h-80 shadow-2xl">
+                    <img src="suret_muellim.jpg" alt="Suret Xəlilov">
+                </div>
+            </div>
+            <div class="md:w-2/3 text-center md:text-left">
+                <h2 class="text-6xl font-black mb-6 tracking-tighter leading-none italic font-heading">Fizik <span class="text-blue-500">FS</span></h2>
+                <p class="text-gray-400 text-lg mb-8 leading-relaxed max-w-xl font-light">
+                    YouTube-da 245.000 abunəçi və 20 milyondan çox izlənmə ilə Azərbaycanın ən aktiv fizika tədris kanallarından birini idarə edirəm.
+                </p>
+                <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                    <div class="bg-gray-800/60 p-5 rounded-2xl border border-gray-700 min-w-[130px]">
+                        <p class="text-3xl font-black text-white leading-none">245K+</p>
+                        <p class="text-[10px] font-bold text-blue-500 uppercase tracking-widest mt-2">Abunəçi</p>
+                    </div>
+                    <div class="bg-gray-800/60 p-5 rounded-2xl border border-gray-700 min-w-[130px]">
+                        <p class="text-3xl font-black text-white leading-none">20M+</p>
+                        <p class="text-[10px] font-bold text-blue-500 uppercase tracking-widest mt-2">İzlənmə</p>
+                    </div>
+                    <div class="bg-gray-800/60 p-5 rounded-2xl border border-gray-700 min-w-[130px]">
+                        <p class="text-3xl font-black text-white leading-none">1000+</p>
+                        <p class="text-[10px] font-bold text-blue-500 uppercase tracking-widest mt-2">Video İzah</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dersler" class="py-24 bg-gray-950 px-6">
+        <div class="container mx-auto max-w-5xl">
+            <h3 class="text-3xl font-black mb-12 text-center underline decoration-blue-600 underline-offset-8 uppercase tracking-tighter">Dərs Nümunələri</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <a href="https://www.youtube.com/watch?v=YmiGz8TDKgw" target="_blank" class="v-card p-6 rounded-2xl flex justify-between items-center group">
+                    <div>
+                        <h4 class="font-bold text-lg group-hover:text-blue-400 transition">Mexaniki Hərəkət</h4>
+                        <p class="text-gray-500 text-sm italic">Sıfırdan fizika dərsləri</p>
+                    </div>
+                    <i class="fab fa-youtube text-3xl text-red-600"></i>
+                </a>
+                <a href="https://www.youtube.com/watch?v=ncxv_BYNzIg" target="_blank" class="v-card p-6 rounded-2xl flex justify-between items-center group">
+                    <div>
+                        <h4 class="font-bold text-lg group-hover:text-blue-400 transition">Aerohidrostatika</h4>
+                        <p class="text-gray-500 text-sm italic">Təzyiq və Arximed qanunu</p>
+                    </div>
+                    <i class="fab fa-youtube text-3xl text-red-600"></i>
+                </a>
+            </div>
+            <div class="mt-12 text-center">
+                <a href="https://www.youtube.com/playlist?list=PLAi1pgVsD5xqxwNu06Oag02qbNBLxsgjB" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-12 rounded-2xl transition shadow-xl">
+                    Fizikadan Ardıcıl Dərslər
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="hazirliq" class="py-24 px-6">
+        <div class="container mx-auto max-w-5xl">
+            <h3 class="text-3xl font-black mb-12 italic text-center underline decoration-blue-500 underline-offset-8 uppercase tracking-tighter">Hazırlıq Vaxtları</h3>
+            <div class="grid md:grid-cols-2 gap-8 text-left">
+                <div class="bg-gray-900 p-8 rounded-3xl border-l-4 border-blue-600 shadow-xl">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold uppercase text-white">10-cu siniflər</h4>
+                        <span class="bg-blue-600/20 text-blue-400 text-[10px] px-3 py-1 rounded-full font-bold uppercase italic">1, 3, 5-ci günlər</span>
+                    </div>
+                    <div class="text-3xl font-black text-white mb-4 italic">07:40 - 09:20</div>
+                    <p class="text-gray-400 text-sm border-t border-gray-800 pt-4 font-light">
+                        <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> 
+                        <strong>Evdərs Tədris Mərkəzi</strong><br>
+                        Nərimanov m., Metroparkın yanı
+                    </p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-3xl border-l-4 border-green-500 shadow-xl">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold uppercase text-white">10-cu siniflər</h4>
+                        <span class="bg-green-600/20 text-green-400 text-[10px] px-3 py-1 rounded-full font-bold uppercase italic">2, 4, 6-cı günlər</span>
+                    </div>
+                    <div class="text-3xl font-black text-white mb-4 italic">08:00 - 10:00</div>
+                    <p class="text-gray-400 text-sm border-t border-gray-800 pt-4 font-light">
+                        <i class="fas fa-map-marker-alt text-green-500 mr-2"></i> 
+                        <strong>Evdərs Tədris Mərkəzi</strong><br>
+                        Nərimanov m., Metroparkın yanı
+                    </p>
+                </div>
+            </div>
+            <div class="mt-10 text-center text-gray-500 italic text-sm font-light italic">
+                * Digər qruplar və fərdi hazırlıq saatları üçün zəhmət olmasa əlaqə saxlayın.
+            </div>
+        </div>
+    </section>
+
+    <footer id="elaqe" class="bg-black py-20 px-6 border-t border-gray-900">
+        <div class="container mx-auto grid md:grid-cols-3 gap-16 text-left">
+            <div>
+                <div class="flex items-center gap-3 mb-6">
+                    <img src="logo.jpeg" alt="Logo" class="nav-logo">
+                    <h4 class="text-2xl font-black italic underline decoration-blue-500">Fizik FS</h4>
+                </div>
+                <p class="text-gray-600 mb-6 leading-relaxed text-sm font-light italic">Mən Surət Xəlilov. Bütün dərslərimdə mürəkkəb mövzuları ən sadə dillə izah edirəm.</p>
+                <div class="text-2xl font-bold text-white tracking-tighter hover:text-blue-500 transition">+994 70 232 41 41</div>
+            </div>
+            <div>
+                <h4 class="text-lg font-bold mb-8 uppercase tracking-widest text-gray-500">Bağlantılar</h4>
+                <ul class="space-y-4 font-bold text-sm">
+                    <li><a href="https://t.me/fizikfs" target="_blank" class="text-gray-400 hover:text-blue-400 transition flex items-center gap-3"><i class="fab fa-telegram-plane"></i> Telegram</a></li>
+                    <li><a href="https://instagram.com/fizikfs.suret_xelilov" target="_blank" class="text-gray-400 hover:text-pink-500 transition flex items-center gap-3"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="https://www.youtube.com/@FizikFS" target="_blank" class="text-gray-400 hover:text-red-600 transition flex items-center gap-3"><i class="fab fa-youtube"></i> YouTube (Fizik FS)</a></li>
+                    <li><a href="https://youtube.com/channel/UCK3AyAWsgBTkGjzD4C6x9fg" target="_blank" class="text-gray-400 hover:text-red-600 transition flex items-center gap-3"><i class="fab fa-youtube"></i> YouTube (İkinci Kanal)</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-col items-center md:items-end justify-center">
+                <a href="tel:+994702324141" class="bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-12 rounded-2xl transition shadow-xl mb-6">ZƏNG ET</a>
+                <p class="text-gray-700 text-[10px] font-bold tracking-widest uppercase italic">© 2026 Suret Xəlilov. Bütün hüquqlar qorunur.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
