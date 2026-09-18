@@ -1,203 +1,1679 @@
 <!DOCTYPE html>
-<html lang="az">
+<html lang="az" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suret Xəlilov | Fizik FS</title>
+    <title>Suret Xəlilov | Fizik FS — Fizika Tədris Platforması</title>
+    <meta name="description" content="Suret Xəlilov - Fizik FS. YouTube-da 245K+ abunəçi və 20M+ izlənmə ilə Azərbaycanın ən aktiv fizika tədris platforması. Əyani və distant fizika hazırlığı.">
     <link rel="shortcut icon" href="logo.jpeg" type="image/x-icon">
+
+    <!-- Immediate Theme Initialization Script (Prevents flash of unstyled theme) -->
+    <script>
+        (function() {
+            try {
+                var saved = localStorage.getItem('fizikfs_theme');
+                var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var theme = saved ? saved : (prefersDark ? 'dark' : 'dark');
+                if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                } else {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
+
+    <!-- Fonts with full Azerbaijani Latin-Extended (Ə, ə, ı, ğ, ç, ş, ö, ü) support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+                        display: ['"Montserrat"', '"Plus Jakarta Sans"', '"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        dark: {
+                            950: '#060913',
+                            900: '#0a0f1d',
+                            850: '#0f172a',
+                            800: '#15213b',
+                            700: '#1e293b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        html { scroll-behavior: smooth; }
-        body { 
-            background-color: #0b0f1a; 
-            color: white; 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
+        :root {
+            color-scheme: dark;
+        }
+
+        body {
+            background-color: #060913;
+            color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             overflow-x: hidden;
-        }
-        section { scroll-margin-top: 80px; }
-        .hero-gradient { background: radial-gradient(circle at top right, #1e293b, #0b0f1a); }
-        .glass-effect { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(12px); }
-
-        .nav-logo {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #3b82f6;
+            selection-background-color: #3b82f6;
+            selection-color: #ffffff;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .profile-wrapper { 
-            overflow: hidden; 
-            border-radius: 2rem; 
-            border: 4px solid #3b82f6; 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            max-width: 280px;
-            margin: 0 auto;
+        ::selection {
+            background-color: #2563eb;
+            color: #ffffff;
         }
-        .profile-wrapper img { transition: transform 0.5s ease; width: 100%; object-fit: cover; }
-        .profile-wrapper:hover img { transform: scale(1.05); }
 
-        .v-card { background: #111827; border: 1px solid #1f2937; transition: 0.3s; }
-        .v-card:hover { border-color: #3b82f6; transform: translateY(-5px); }
+        /* Smooth theme transitions */
+        .glass-panel, header nav, input, select, footer, .faq-item, .teacher-frame {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
 
-        @media (max-width: 768px) {
-            .hero-text { font-size: 2.8rem !important; line-height: 1.1; }
-            section { padding-top: 4rem; padding-bottom: 4rem; }
+        /* Subtle grid and glows */
+        .bg-grid-pattern {
+            background-size: 44px 44px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            transition: opacity 0.3s ease;
+        }
+
+        .radial-ambient {
+            background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.18), transparent 70%);
+        }
+
+        .radial-ambient-bottom {
+            background: radial-gradient(circle at 50% 120%, rgba(37, 99, 235, 0.12), transparent 60%);
+        }
+
+        /* Glassmorphic card styling */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel-hover {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-panel-hover:hover {
+            background: rgba(21, 33, 59, 0.75);
+            border-color: rgba(96, 165, 250, 0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(2, 6, 23, 0.8), 0 0 25px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Gradient text */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 30%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Glow effects */
+        .blue-glow {
+            box-shadow: 0 0 40px -10px rgba(59, 130, 246, 0.3);
+        }
+
+        .button-glow {
+            box-shadow: 0 0 25px -4px rgba(37, 99, 235, 0.4);
+            transition: all 0.25s ease;
+        }
+
+        .button-glow:hover {
+            box-shadow: 0 0 35px -2px rgba(59, 130, 246, 0.65);
+            transform: translateY(-2px);
+        }
+
+        /* Avatar frame styling */
+        .teacher-frame {
+            position: relative;
+            border-radius: 2rem;
+            background: linear-gradient(145deg, rgba(59, 130, 246, 0.5), rgba(30, 58, 138, 0.2) 40%, rgba(255, 255, 255, 0.05));
+            padding: 4px;
+            box-shadow: 0 25px 60px -15px rgba(2, 6, 23, 0.9), 0 0 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .teacher-frame img {
+            border-radius: calc(2rem - 4px);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .teacher-frame:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060913;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+
+        /* Animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        @keyframes pulseRing {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 0.3; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        .pulse-ring {
+            animation: pulseRing 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Reveal animations */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-element.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =============================================================
+           LIGHT MODE DESIGN SYSTEM
+           ============================================================= */
+        html.light {
+            color-scheme: light;
+        }
+
+        html.light body {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        html.light ::selection {
+            background-color: #3b82f6;
+            color: #ffffff;
+        }
+
+        html.light .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+        }
+
+        html.light .radial-ambient {
+            background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.12), transparent 70%);
+        }
+
+        html.light .radial-ambient-bottom {
+            background: radial-gradient(circle at 50% 120%, rgba(37, 99, 235, 0.08), transparent 60%);
+        }
+
+        html.light .glass-panel {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(226, 232, 240, 0.95);
+            box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.06);
+        }
+
+        html.light .glass-panel-hover:hover {
+            background: #ffffff;
+            border-color: rgba(59, 130, 246, 0.45);
+            box-shadow: 0 20px 35px -10px rgba(37, 99, 235, 0.12);
+        }
+
+        html.light .text-gradient {
+            background: linear-gradient(135deg, #0f172a 30%, #2563eb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        html.light .teacher-frame {
+            background: linear-gradient(145deg, rgba(59, 130, 246, 0.4), rgba(191, 219, 254, 0.5) 40%, rgba(255, 255, 255, 0.9));
+            box-shadow: 0 20px 45px -10px rgba(59, 130, 246, 0.15), 0 8px 20px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Light mode text colors */
+        html.light h1,
+        html.light h2,
+        html.light h3,
+        html.light h4,
+        html.light h5,
+        html.light .counter {
+            color: #0f172a !important;
+        }
+
+        html.light .brand-teacher-name {
+            color: #0f172a !important;
+        }
+
+        html.light p.text-slate-300,
+        html.light p.text-slate-400,
+        html.light span.text-slate-300,
+        html.light span.text-slate-400,
+        html.light div.text-slate-400 {
+            color: #475569 !important;
+        }
+
+        html.light span.text-slate-200,
+        html.light a.text-slate-200 {
+            color: #1e293b !important;
+        }
+
+        html.light span.text-slate-500,
+        html.light p.text-slate-500 {
+            color: #64748b !important;
+        }
+
+        /* Light mode containers & backgrounds */
+        html.light section.bg-slate-950\/50,
+        html.light .bg-slate-950\/50 {
+            background-color: rgba(241, 245, 249, 0.65) !important;
+        }
+
+        html.light .bg-slate-900,
+        html.light .bg-slate-950 {
+            background-color: #f1f5f9 !important;
+        }
+
+        html.light .bg-slate-900\/80,
+        html.light .bg-slate-900\/90,
+        html.light .bg-slate-900\/40,
+        html.light .bg-slate-900\/60 {
+            background-color: #ffffff !important;
+            border-color: #e2e8f0 !important;
+        }
+
+        html.light .bg-slate-800,
+        html.light .bg-slate-800\/80,
+        html.light .bg-slate-800\/60,
+        html.light .bg-slate-800\/50 {
+            background-color: #f1f5f9 !important;
+            color: #1e293b !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        html.light .border-slate-800,
+        html.light .border-slate-800\/80,
+        html.light .border-slate-800\/60,
+        html.light .border-slate-800\/40,
+        html.light .border-slate-700 {
+            border-color: #e2e8f0 !important;
+        }
+
+        /* Form elements in light mode */
+        html.light input,
+        html.light select,
+        html.light textarea {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        html.light label {
+            color: #334155 !important;
+        }
+
+        html.light select option {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+        }
+
+        /* Accordion items in light mode */
+        html.light .faq-item {
+            background: #ffffff !important;
+            border-color: #e2e8f0 !important;
+        }
+
+        html.light .faq-toggle span {
+            color: #0f172a !important;
+        }
+
+        html.light .faq-toggle .faq-icon {
+            background-color: #eff6ff !important;
+            color: #2563eb !important;
+        }
+
+        html.light .faq-content {
+            border-top-color: #f1f5f9 !important;
+        }
+
+        /* Video Modal */
+        html.light #video-modal {
+            background-color: rgba(15, 23, 42, 0.7) !important;
+        }
+
+        html.light #video-modal-content {
+            background-color: #ffffff !important;
+            border-color: #e2e8f0 !important;
+        }
+
+        html.light #video-modal-content h3 {
+            color: #0f172a !important;
+        }
+
+        /* Toast in light mode */
+        html.light #toast {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-color: #3b82f6 !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Scrollbar in light mode */
+        html.light ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+
+        html.light ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+        }
+
+        html.light ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+
+        /* High contrast text overrides for light mode */
+        html.light .text-white:not(.keep-white):not([class*="bg-blue"]):not([class*="bg-emerald"]):not([class*="bg-red"]):not([class*="from-blue"]):not([class*="from-indigo"]):not([class*="bg-black"]) {
+            color: #0f172a !important;
+        }
+
+        html.light a[href*="aurahubs.com"] {
+            color: #0f172a !important;
+        }
+
+        html.light a[href*="aurahubs.com"]:hover {
+            color: #2563eb !important;
+        }
+
+        html.light .border-slate-850 {
+            border-color: #e2e8f0 !important;
+        }
+
+        html.light .bg-slate-850 {
+            background-color: #f1f5f9 !important;
+        }
+
+        /* Ensure colored buttons remain white text */
+        .btn-colored-text,
+        .keep-white,
+        a.bg-blue-600,
+        button.bg-blue-600,
+        [class*="bg-blue-600"],
+        [class*="from-blue-600"],
+        [class*="bg-emerald-600"] {
+            color: #ffffff !important;
         }
     </style>
 </head>
-<body>
+<body class="relative min-h-screen">
 
-    <nav class="fixed w-full z-50 glass-effect border-b border-gray-800 p-3 md:p-4">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <div class="flex items-center gap-3">
-                <img src="logo.jpeg" alt="Logo" class="nav-logo">
-                <div class="text-lg md:text-xl font-black italic tracking-tighter">
-                    <span class="text-white">SURET</span> <span class="text-blue-500">XƏLİLOV</span>
-                </div>
-            </div>
-            <div class="hidden md:flex space-x-6 font-bold text-xs uppercase tracking-widest">
-                <a href="#haqqimda" class="hover:text-blue-400 transition">Haqqımda</a>
-                <a href="#dersler" class="hover:text-blue-400 transition">Dərslər</a>
-                <a href="#hazirliq" class="hover:text-blue-400 transition">Hazırlıq</a>
-                <a href="#suallar" class="hover:text-blue-400 transition">Suallar</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Interactive Canvas for Particle Physics Background -->
+    <canvas id="physics-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
 
-    <section id="haqqimda" class="pt-32 pb-16 px-6 hero-gradient">
-        <div class="container mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-16">
-            <div class="w-full md:w-1/3 text-center">
-                <div class="profile-wrapper">
-                    <img src="suret_muellim.jpg" alt="Suret Xəlilov">
-                </div>
-            </div>
-            <div class="w-full md:w-2/3 text-center md:text-left">
-                <h1 class="hero-text text-5xl md:text-7xl font-black mb-4 tracking-tighter italic leading-tight">
-                    Fizik <span class="text-blue-500">FS</span>
-                </h1>
-                <p class="text-gray-400 text-base md:text-lg mb-8 max-w-xl mx-auto md:mx-0 font-light leading-relaxed">
-                    YouTube-da 245K+ abunəçi və 20M+ izlənmə ilə Azərbaycanın ən aktiv fizika tədris platforması.
-                </p>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-sm md:max-w-none mx-auto">
-                    <div class="bg-gray-800/60 p-4 rounded-xl border border-gray-700">
-                        <p class="text-xl md:text-2xl font-black text-white">245K+</p>
-                        <p class="text-[9px] font-bold text-blue-500 uppercase mt-1">Abunəçi</p>
-                    </div>
-                    <div class="bg-gray-800/60 p-4 rounded-xl border border-gray-700">
-                        <p class="text-xl md:text-2xl font-black text-white">20M+</p>
-                        <p class="text-[9px] font-bold text-blue-500 uppercase mt-1">İzlənmə</p>
-                    </div>
-                    <div class="bg-gray-800/60 p-4 rounded-xl border border-gray-700 col-span-2 md:col-span-1">
-                        <p class="text-xl md:text-2xl font-black text-white">1000+</p>
-                        <p class="text-[9px] font-bold text-blue-500 uppercase mt-1">Video İzah</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Ambient Lighting Overlays -->
+    <div class="fixed inset-0 pointer-events-none bg-grid-pattern opacity-60 z-0"></div>
+    <div class="fixed top-0 left-0 right-0 h-96 pointer-events-none radial-ambient z-0"></div>
+    <div class="fixed bottom-0 left-0 right-0 h-96 pointer-events-none radial-ambient-bottom z-0"></div>
 
-    <section id="dersler" class="py-16 bg-gray-950 px-6">
-        <div class="container mx-auto max-w-5xl">
-            <h2 class="text-2xl md:text-3xl font-black mb-10 text-center underline decoration-blue-600 underline-offset-8 uppercase tracking-tighter">Dərs Nümunələri</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a href="https://www.youtube.com/watch?v=YmiGz8TDKgw" target="_blank" class="v-card p-5 rounded-2xl flex justify-between items-center group">
-                    <div>
-                        <h4 class="font-bold group-hover:text-blue-400 transition">Mexaniki Hərəkət</h4>
-                        <p class="text-gray-500 text-xs italic">Sıfırdan fizika dərsləri</p>
-                    </div>
-                    <i class="fab fa-youtube text-2xl text-red-600"></i>
-                </a>
-                <a href="https://www.youtube.com/watch?v=ncxv_BYNzIg" target="_blank" class="v-card p-5 rounded-2xl flex justify-between items-center group">
-                    <div>
-                        <h4 class="font-bold group-hover:text-blue-400 transition">Aerohidrostatika</h4>
-                        <p class="text-gray-500 text-xs italic">Təzyiq və Arximed qanunu</p>
-                    </div>
-                    <i class="fab fa-youtube text-2xl text-red-600"></i>
-                </a>
+    <!-- Notification Toast Container -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-900/90 border border-blue-500/50 shadow-2xl backdrop-blur-xl text-white text-sm">
+        <i class="fas fa-check-circle text-blue-400 text-base"></i>
+        <span id="toast-message" class="font-medium">Məlumat kopyalandı!</span>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-md opacity-0 transition-opacity duration-300">
+        <div class="relative w-full max-w-4xl bg-slate-950 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="video-modal-content">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800/80 bg-slate-900/60">
+                <div class="flex items-center gap-3">
+                    <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                    <h3 id="modal-video-title" class="font-display font-bold text-white text-base sm:text-lg">Video Dərs</h3>
+                </div>
+                <button id="close-modal-btn" class="text-slate-400 hover:text-white p-2 rounded-xl hover:bg-slate-800 transition" aria-label="Bağla">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
             </div>
-            <div class="mt-10 text-center">
-                <a href="https://www.youtube.com/playlist?list=PLAi1pgVsD5xqxwNu06Oag02qbNBLxsgjB" target="_blank" 
-                   class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-black py-4 px-8 md:px-12 rounded-2xl transition shadow-xl shadow-blue-600/20 text-sm md:text-base uppercase tracking-wider">
-                    Fizikadan Ardıcıl Dərslər
+            <div class="relative aspect-video w-full bg-black">
+                <iframe id="video-frame" class="w-full h-full" src="" title="Video Dərs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="p-4 sm:p-5 bg-slate-900/40 flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/60">
+                <p class="text-xs sm:text-sm text-slate-400">Suret Xəlilov | Fizik FS rəsmi YouTube video tədrisi</p>
+                <a id="modal-external-link" href="#" target="_blank" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-blue-400 hover:text-blue-300 transition">
+                    <span>YouTube-da aç</span>
+                    <i class="fas fa-arrow-up-right-from-square text-xs"></i>
                 </a>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="hazirliq" class="py-16 px-6">
-        <div class="container mx-auto max-w-5xl">
-            <h2 class="text-2xl md:text-3xl font-black mb-10 text-center underline decoration-blue-600 underline-offset-8 uppercase tracking-tighter italic">Hazırlıq Vaxtları</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-gray-900 p-6 md:p-8 rounded-3xl border-l-4 border-blue-600 shadow-xl">
-                    <span class="text-[10px] font-bold text-blue-400 uppercase italic">1, 3, 5-ci günlər</span>
-                    <div class="text-2xl md:text-3xl font-black my-2">07:40 - 09:20</div>
-                    <p class="text-gray-400 text-sm border-t border-gray-800 pt-4 font-light">
-                        <i class="fas fa-map-marker-alt text-blue-500 mr-1"></i> Təbriz küç. 210A
-                    </p>
-                </div>
-                <div class="bg-gray-900 p-6 md:p-8 rounded-3xl border-l-4 border-green-500 shadow-xl">
-                    <span class="text-[10px] font-bold text-green-400 uppercase italic">2, 4, 6-cı günlər</span>
-                    <div class="text-2xl md:text-3xl font-black my-2">08:00 - 10:00</div>
-                    <p class="text-gray-400 text-sm border-t border-gray-800 pt-4 font-light">
-                        <i class="fas fa-map-marker-alt text-green-500 mr-1"></i> Təbriz küç. 210A
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="suallar" class="py-16 bg-gray-950 px-6">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-2xl md:text-3xl font-black mb-10 text-center underline decoration-blue-600 underline-offset-8 uppercase tracking-tighter">Suallar</h2>
-            <div class="space-y-4">
-                <div class="bg-gray-900 p-5 rounded-xl border border-gray-800">
-                    <h4 class="text-blue-400 font-bold text-sm md:text-base mb-2 italic">Distant(Online) Dərslər Keçirsiniz mi?</h4>
-                    <p class="text-gray-400 text-xs md:text-sm">Bəli, 2, 4, 6-cı günlər saat 18:00 - 20:00 radələrində distant dərslərimiz təşkil olunur.</p>
-                </div>
-                <div class="bg-gray-900 p-5 rounded-xl border border-gray-800">
-                    <h4 class="text-blue-400 font-bold text-sm md:text-base mb-2 italic">Əyani hazırlıq harada keçirilir?</h4>
-                    <p class="text-gray-400 text-xs md:text-sm">Əyani hazırlıqlarımız Təbriz küç. 210A ünvanında keçirilir.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer id="elaqe" class="bg-black py-12 px-6 border-t border-gray-900">
-        <div class="container mx-auto text-center md:text-left">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
-                <div>
-                    <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
-                        <img src="logo.jpeg" alt="Logo" class="nav-logo">
-                        <h4 class="text-xl font-black italic underline decoration-blue-500 uppercase">Fizik FS</h4>
+    <!-- Modern Header / Navigation -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto">
+            <nav class="glass-panel rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between shadow-lg shadow-black/20 border border-slate-800/80">
+                <!-- Brand Logo & Teacher Info -->
+                <a href="#haqqimda" class="flex items-center gap-3 group">
+                    <div class="relative">
+                        <img src="logo.jpeg" alt="Fizik FS Logo" class="w-10 h-10 rounded-full object-cover border-2 border-blue-500/80 shadow-md group-hover:scale-105 transition-transform duration-300">
+                        <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-slate-950"></span>
                     </div>
-                    <p class="text-lg font-bold text-white tracking-tighter italic">+994 70 232 41 41</p>
+                    <div class="flex flex-col">
+                        <div class="flex items-center gap-1.5 font-display font-black tracking-tight text-base sm:text-lg leading-tight">
+                            <span class="text-white group-hover:text-blue-400 transition">SURET</span>
+                            <span class="text-blue-500">XƏLİLOV</span>
+                        </div>
+                        <span class="text-[10px] font-semibold uppercase tracking-widest text-slate-400 font-sans">Fizik FS • Tədris Mərkəzi</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex items-center gap-1 lg:gap-2">
+                    <a href="#haqqimda" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Haqqımda</a>
+                    <a href="#dersler" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Dərslər</a>
+                    <a href="#hazirliq" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Hazırlıq</a>
+                    <a href="#suallar" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Suallar</a>
+                    <a href="#qeydiyyat" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Qeydiyyat</a>
                 </div>
 
-                <div class="flex justify-center gap-6">
-                    <a href="https://t.me/fizikfs" target="_blank" class="text-gray-400 hover:text-blue-400 text-2xl transition"><i class="fab fa-telegram"></i></a>
-                    <a href="https://instagram.com/fizikfs.suret_xelilov" target="_blank" class="text-gray-400 hover:text-pink-500 text-2xl transition"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/@FizikFS" target="_blank" class="text-gray-400 hover:text-red-600 text-2xl transition"><i class="fab fa-youtube"></i></a>
-                </div>
+                <!-- Action Button & Mobile Menu Toggle -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Light / Dark Mode Toggle Button -->
+                    <button id="theme-toggle" class="p-2 sm:px-3 sm:py-2 rounded-xl glass-panel text-slate-300 hover:text-white transition flex items-center justify-center gap-2 border border-slate-700/80 hover:border-blue-500/50 focus:outline-none" aria-label="Rejimi dəyiş" title="Açıq / Qaranlıq rejim">
+                        <i id="theme-toggle-icon" class="fas fa-sun text-amber-400 text-sm"></i>
+                        <span id="theme-toggle-text" class="hidden sm:inline text-xs font-semibold">Qaranlıq</span>
+                    </button>
 
-                <div class="flex flex-col items-center md:items-end gap-3">
-                    <p class="text-white text-[11px] tracking-wide">
-                        Developed By <span class="text-blue-500 font-black uppercase">Onur Mansurov</span>
-                    </p>
-                    <a href="https://wa.me/994513450705?text=Salam, vebsayt sifarişi üçün yazıram." 
-                       target="_blank" 
-                       class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition shadow-lg flex items-center gap-2 text-[10px] uppercase">
-                        <i class="fab fa-whatsapp text-sm"></i> Vebsayt Sifarişi
+                    <a href="https://wa.me/994702324141?text=Salam,%20Suret%20müəllim.%20Fizika%20hazırlığı%20üçün%20məlumat%20almaq%20istəyirəm." target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-600 text-white font-bold text-xs px-4 py-2.5 rounded-xl button-glow transition">
+                        <i class="fab fa-whatsapp text-sm"></i>
+                        <span>Dərslərə Yazıl</span>
                     </a>
+
+                    <!-- Mobile Hamburger -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white rounded-xl hover:bg-slate-800/60 focus:outline-none" aria-label="Menyu">
+                        <i class="fas fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mobile Navigation Drawer -->
+            <div id="mobile-menu" class="hidden md:hidden mt-2 glass-panel rounded-2xl p-5 border border-slate-800 shadow-2xl transition-all duration-300">
+                <div class="flex flex-col gap-2">
+                    <a href="#haqqimda" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800/60 transition">
+                        <span>Haqqımda</span>
+                        <i class="fas fa-chevron-right text-xs text-slate-500"></i>
+                    </a>
+                    <a href="#dersler" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800/60 transition">
+                        <span>Dərslər</span>
+                        <i class="fas fa-chevron-right text-xs text-slate-500"></i>
+                    </a>
+                    <a href="#hazirliq" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800/60 transition">
+                        <span>Hazırlıq Vaxtları</span>
+                        <i class="fas fa-chevron-right text-xs text-slate-500"></i>
+                    </a>
+                    <a href="#qeydiyyat" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800/60 transition">
+                        <span>Qeydiyyat & Müraciət</span>
+                        <i class="fas fa-chevron-right text-xs text-slate-500"></i>
+                    </a>
+                    <a href="#suallar" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800/60 transition">
+                        <span>Tez-Tez Verilən Suallar</span>
+                        <i class="fas fa-chevron-right text-xs text-slate-500"></i>
+                    </a>
+
+                    <!-- Mobile Theme Switcher Row -->
+                    <button id="theme-toggle-mobile" class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800/60 transition text-left border border-slate-700/50 my-1">
+                        <div class="flex items-center gap-2.5">
+                            <i id="theme-icon-mobile" class="fas fa-sun text-amber-400"></i>
+                            <span id="theme-text-mobile">Açıq Rejimə Keç</span>
+                        </div>
+                        <span class="text-[11px] px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-400 font-bold uppercase tracking-wider">Rejimi Dəyiş</span>
+                    </button>
+                    <div class="pt-3 mt-1 border-t border-slate-800/80 flex flex-col gap-2">
+                        <a href="tel:+994702324141" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-slate-800 text-white text-sm font-bold">
+                            <i class="fas fa-phone-alt text-blue-400"></i>
+                            <span>+994 70 232 41 41</span>
+                        </a>
+                        <a href="https://wa.me/994702324141" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp ilə Əlaqə</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <p class="text-gray-700 text-[8px] font-bold tracking-widest uppercase mt-10">© 2026 Fizik FS. Bütün hüquqlar qorunur.</p>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-28 sm:pt-36">
+
+        <!-- ==============================================
+             HERO SECTION (Haqqımda & Stat Cards)
+             ============================================== -->
+        <section id="haqqimda" class="py-6 sm:py-16 px-4 sm:px-6 relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    
+                    <!-- Left / Top: Portrait Card with Physics Badges (Mobile-first order-1) -->
+                    <div class="lg:col-span-5 order-1 flex justify-center reveal-element">
+                        <div class="relative w-full max-w-[250px] sm:max-w-[280px] lg:max-w-sm mx-auto">
+                            <!-- Glowing background halo -->
+                            <div class="absolute -inset-1.5 sm:-inset-2 bg-gradient-to-r from-blue-600/30 to-sky-500/20 rounded-[2.5rem] blur-2xl opacity-60"></div>
+                            
+                            <!-- Main Portrait Frame -->
+                            <div class="teacher-frame relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-blue-500/30">
+                                <img src="suret_muellim.jpg" alt="Suret Xəlilov" class="w-full aspect-[4/5] object-cover object-center">
+                                
+                                <!-- Floating Verified Badge -->
+                                <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 glass-panel p-2.5 sm:p-3.5 rounded-2xl border border-white/10 shadow-xl flex items-center gap-2.5 sm:gap-3 backdrop-blur-xl">
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-blue-400 shrink-0">
+                                        <i class="fas fa-atom text-sm sm:text-lg"></i>
+                                    </div>
+                                    <div class="overflow-hidden text-left">
+                                        <p class="text-xs font-bold text-white tracking-wide truncate">Suret Xəlilov</p>
+                                        <p class="text-[10px] sm:text-[11px] text-blue-400 font-medium truncate">Fizik FS • Baş Müəllim</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Pill 1 (2026-2027 Cədvəli) -->
+                            <div class="absolute -top-2.5 -right-2.5 sm:-top-3 sm:-right-3 z-20 glass-panel px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-blue-500/30 shadow-lg flex items-center gap-1.5 sm:gap-2 animate-float">
+                                <span class="w-2 h-2 rounded-full bg-blue-400 pulse-ring"></span>
+                                <span class="text-[11px] sm:text-xs font-bold text-slate-200">2026-2027 Cədvəli</span>
+                            </div>
+
+                            <!-- Floating Pill 2 (Qeydiyyat Aktivdir) -->
+                            <div class="absolute -bottom-2.5 -left-2.5 sm:-bottom-3 sm:-left-3 z-20 glass-panel px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl border border-emerald-500/30 shadow-lg flex items-center gap-1.5 sm:gap-2">
+                                <i class="fas fa-circle-check text-emerald-400 text-xs"></i>
+                                <span class="text-[11px] sm:text-xs font-bold text-slate-200">Qeydiyyat Aktivdir</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right / Bottom: Content & Core Messaging (order-2) -->
+                    <div class="lg:col-span-7 order-2 text-center lg:text-left reveal-element">
+                        
+                        <!-- Mini Eyebrow Badge -->
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/60 border border-blue-500/30 text-blue-400 text-xs font-semibold uppercase tracking-wider mb-4 sm:mb-5">
+                            <i class="fab fa-youtube text-red-500 text-sm"></i>
+                            <span>Azərbaycanın #1 Fizika Tədris Şəbəkəsi</span>
+                        </div>
+
+                        <h1 class="font-display font-black text-3xl sm:text-5xl lg:text-7xl tracking-tight text-white mb-4 sm:mb-6 leading-[1.08]">
+                            Fizik <span class="text-gradient-blue italic">FS</span>
+                        </h1>
+
+                        <p class="text-slate-300 text-sm sm:text-base lg:text-xl font-normal leading-relaxed mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0">
+                            YouTube-da <span class="text-white font-bold">245K+ abunəçi</span> və <span class="text-white font-bold">20M+ izlənmə</span> ilə Azərbaycanın ən aktiv və etibarlı fizika tədris platforması. Qəbul və təkmilləşdirmə hazırlığı.
+                        </p>
+
+                        <!-- Key Value Metrics Grid (Optimized 3-columns for mobile) -->
+                        <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
+                            <div class="glass-panel p-3 sm:p-5 rounded-2xl border border-slate-800 relative overflow-hidden group hover:border-blue-500/40 transition">
+                                <div class="absolute top-0 right-0 w-12 h-12 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition"></div>
+                                <div class="flex items-baseline justify-center lg:justify-start gap-0.5 sm:gap-1">
+                                    <span class="font-display font-black text-xl sm:text-3xl lg:text-4xl text-white counter" data-target="245">0</span>
+                                    <span class="font-display font-extrabold text-blue-400 text-base sm:text-2xl">K+</span>
+                                </div>
+                                <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1 text-center lg:text-left truncate">Abunəçi</p>
+                            </div>
+
+                            <div class="glass-panel p-3 sm:p-5 rounded-2xl border border-slate-800 relative overflow-hidden group hover:border-blue-500/40 transition">
+                                <div class="absolute top-0 right-0 w-12 h-12 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition"></div>
+                                <div class="flex items-baseline justify-center lg:justify-start gap-0.5 sm:gap-1">
+                                    <span class="font-display font-black text-xl sm:text-3xl lg:text-4xl text-white counter" data-target="20">0</span>
+                                    <span class="font-display font-extrabold text-blue-400 text-base sm:text-2xl">M+</span>
+                                </div>
+                                <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1 text-center lg:text-left truncate">İzlənmə</p>
+                            </div>
+
+                            <div class="glass-panel p-3 sm:p-5 rounded-2xl border border-slate-800 relative overflow-hidden group hover:border-blue-500/40 transition">
+                                <div class="absolute top-0 right-0 w-12 h-12 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition"></div>
+                                <div class="flex items-baseline justify-center lg:justify-start gap-0.5 sm:gap-1">
+                                    <span class="font-display font-black text-xl sm:text-3xl lg:text-4xl text-white counter" data-target="1000">0</span>
+                                    <span class="font-display font-extrabold text-blue-400 text-base sm:text-2xl">+</span>
+                                </div>
+                                <p class="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider mt-1 text-center lg:text-left truncate">Video İzah</p>
+                            </div>
+                        </div>
+
+                        <!-- CTA Actions (Responsive mobile stack and desktop row) -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4">
+                            <a href="#hazirliq" class="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-2xl button-glow transition shadow-lg shadow-blue-900/40">
+                                <i class="fas fa-calendar-alt text-sm"></i>
+                                <span>2026-2027 Cədvəli</span>
+                            </a>
+                            <a href="#dersler" class="inline-flex items-center justify-center gap-2 glass-panel hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-sm sm:text-base px-5 py-3.5 rounded-2xl border border-slate-700 transition">
+                                <i class="fab fa-youtube text-red-500 text-base"></i>
+                                <span>Dərsləri İzlə</span>
+                            </a>
+                            <a href="https://wa.me/994702324141" target="_blank" class="inline-flex items-center justify-center gap-2 text-slate-300 hover:text-emerald-400 font-semibold text-xs sm:text-sm py-2 px-3 transition">
+                                <i class="fab fa-whatsapp text-emerald-400 text-base"></i>
+                                <span>+994 70 232 41 41</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             DƏRSLƏR SECTION (Video Samples & Playlists)
+             ============================================== -->
+        <section id="dersler" class="py-20 px-4 sm:px-6 relative">
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-2xl mx-auto mb-14 reveal-element">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-blue-400 text-xs font-bold uppercase tracking-wider mb-3">
+                        <i class="fas fa-play-circle text-xs"></i>
+                        <span>Video Dərslər</span>
+                    </div>
+                    <h2 class="font-display font-black text-3xl sm:text-5xl text-white tracking-tight mb-4">
+                        Dərs Nümunələri
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base">
+                        Fizikanın ən vacib mövzularının sıfırdan sistemli və dərindən video izahları.
+                    </p>
+                </div>
+
+                <!-- Video Cards Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-12">
+                    
+                    <!-- Video Card 1: Mexaniki Hərəkət -->
+                    <div class="glass-panel rounded-3xl overflow-hidden glass-panel-hover reveal-element group flex flex-col justify-between">
+                        <div>
+                            <!-- Video Thumbnail Area with Play Button Trigger -->
+                            <div class="relative aspect-video w-full overflow-hidden bg-slate-950 cursor-pointer video-trigger" data-video-id="YmiGz8TDKgw" data-video-title="Mexaniki Hərəkət | Sıfırdan Fizika Dərsləri">
+                                <img src="https://img.youtube.com/vi/YmiGz8TDKgw/maxresdefault.jpg" alt="Mexaniki Hərəkət" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" onerror="this.src='https://img.youtube.com/vi/YmiGz8TDKgw/hqdefault.jpg'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                                
+                                <!-- Play Button Floating -->
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-600 transition-all duration-300">
+                                        <i class="fas fa-play text-lg sm:text-xl ml-1"></i>
+                                    </div>
+                                </div>
+
+                                <div class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-black/70 backdrop-blur-md text-[11px] font-bold text-white border border-white/10 flex items-center gap-1.5">
+                                    <i class="fab fa-youtube text-red-500"></i>
+                                    <span>HD İzah</span>
+                                </div>
+                            </div>
+
+                            <!-- Video Info -->
+                            <div class="p-6">
+                                <div class="flex items-center gap-2 mb-2.5">
+                                    <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-950/80 border border-blue-800/60 text-blue-400">Kinematika</span>
+                                    <span class="text-xs text-slate-500">•</span>
+                                    <span class="text-xs text-slate-400 font-medium">Bütün siniflər üçün</span>
+                                </div>
+                                <h3 class="font-display font-bold text-xl sm:text-2xl text-white group-hover:text-blue-400 transition mb-2">
+                                    Mexaniki Hərəkət
+                                </h3>
+                                <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                                    Sıfırdan fizika dərsləri — düzxətli bərabərsürətli hərəkət, sürət, təcil və qrafiklərin dərindən izahı.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2 border-t border-slate-850 flex items-center justify-between">
+                            <button class="video-trigger inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-blue-400 hover:text-blue-300 transition" data-video-id="YmiGz8TDKgw" data-video-title="Mexaniki Hərəkət | Sıfırdan Fizika Dərsləri">
+                                <i class="fas fa-circle-play"></i>
+                                <span>Saytda İzlə</span>
+                            </button>
+                            <a href="https://www.youtube.com/watch?v=YmiGz8TDKgw" target="_blank" class="text-xs font-semibold text-slate-500 hover:text-red-400 transition flex items-center gap-1">
+                                <span>YouTube-da aç</span>
+                                <i class="fas fa-external-link-alt text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Video Card 2: Aerohidrostatika -->
+                    <div class="glass-panel rounded-3xl overflow-hidden glass-panel-hover reveal-element group flex flex-col justify-between">
+                        <div>
+                            <!-- Video Thumbnail Area with Play Button Trigger -->
+                            <div class="relative aspect-video w-full overflow-hidden bg-slate-950 cursor-pointer video-trigger" data-video-id="ncxv_BYNzIg" data-video-title="Aerohidrostatika | Təzyiq və Arximed Qanunu">
+                                <img src="https://img.youtube.com/vi/ncxv_BYNzIg/maxresdefault.jpg" alt="Aerohidrostatika" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" onerror="this.src='https://img.youtube.com/vi/ncxv_BYNzIg/hqdefault.jpg'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+                                
+                                <!-- Play Button Floating -->
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-red-600 transition-all duration-300">
+                                        <i class="fas fa-play text-lg sm:text-xl ml-1"></i>
+                                    </div>
+                                </div>
+
+                                <div class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-black/70 backdrop-blur-md text-[11px] font-bold text-white border border-white/10 flex items-center gap-1.5">
+                                    <i class="fab fa-youtube text-red-500"></i>
+                                    <span>HD İzah</span>
+                                </div>
+                            </div>
+
+                            <!-- Video Info -->
+                            <div class="p-6">
+                                <div class="flex items-center gap-2 mb-2.5">
+                                    <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-sky-950/80 border border-sky-800/60 text-sky-400">Hidrostatika</span>
+                                    <span class="text-xs text-slate-500">•</span>
+                                    <span class="text-xs text-slate-400 font-medium">Qəbul & MİQ</span>
+                                </div>
+                                <h3 class="font-display font-bold text-xl sm:text-2xl text-white group-hover:text-blue-400 transition mb-2">
+                                    Aerohidrostatika
+                                </h3>
+                                <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                                    Təzyiq, mayelərin və qazların qanunauyğunluqları, Paskal və Arximed qanununun asan izahı.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="px-6 pb-6 pt-2 border-t border-slate-850 flex items-center justify-between">
+                            <button class="video-trigger inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-blue-400 hover:text-blue-300 transition" data-video-id="ncxv_BYNzIg" data-video-title="Aerohidrostatika | Təzyiq və Arximed Qanunu">
+                                <i class="fas fa-circle-play"></i>
+                                <span>Saytda İzlə</span>
+                            </button>
+                            <a href="https://www.youtube.com/watch?v=ncxv_BYNzIg" target="_blank" class="text-xs font-semibold text-slate-500 hover:text-red-400 transition flex items-center gap-1">
+                                <span>YouTube-da aç</span>
+                                <i class="fas fa-external-link-alt text-[10px]"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Playlist Master Banner Callout -->
+                <div class="glass-panel p-6 sm:p-10 rounded-3xl border border-blue-500/20 relative overflow-hidden reveal-element">
+                    <div class="absolute -right-16 -top-16 w-64 h-64 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+                    
+                    <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6 text-center lg:text-left">
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/40 border border-blue-600/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-2">
+                                <i class="fas fa-list-ul"></i>
+                                <span>Tam Dərs Seriyası</span>
+                            </div>
+                            <h3 class="font-display font-black text-2xl sm:text-3xl text-white mb-2">
+                                Fizikadan Ardıcıl və Sistemli Dərslər
+                            </h3>
+                            <p class="text-slate-400 text-sm sm:text-base max-w-xl">
+                                Mexanika, Molekulyar fizika, Elektrodinamika, Optika və Atom fizikası üzrə bütün mövzuları əhatə edən rəsmi pleylist.
+                            </p>
+                        </div>
+                        <a href="https://www.youtube.com/playlist?list=PLAi1pgVsD5xqxwNu06Oag02qbNBLxsgjB" target="_blank" class="shrink-0 inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold px-8 py-4 rounded-2xl button-glow transition text-sm sm:text-base tracking-wide">
+                            <i class="fab fa-youtube text-lg"></i>
+                            <span>Bütün Pleylisti Aç</span>
+                            <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==============================================
+             HAZIRLIQ VAXTLARI SECTION (Schedules & Modalities)
+             ============================================== -->
+        <section id="hazirliq" class="py-16 sm:py-20 px-4 sm:px-6 relative bg-slate-950/50">
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-14 reveal-element">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-3">
+                        <i class="fas fa-calendar-days text-xs"></i>
+                        <span>2026-2027-ci il Dərs Cədvəli</span>
+                    </div>
+                    <h2 class="font-display font-black text-3xl sm:text-5xl text-white tracking-tight mb-4">
+                        Hazırlıq Vaxtları
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base">
+                        Surət Xəlilov ilə əyani gimnaziyada və canlı interaktiv online formatda yeni tədris qrafiki.
+                    </p>
+                </div>
+
+                <!-- Schedule Cards Grid (3 distinct columns matching the official schedule) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 sm:mb-12">
+                    
+                    <!-- Card 1: Əyani 11-ci sinif (Blue Accent) -->
+                    <div class="glass-panel p-6 sm:p-7 rounded-3xl border-t-4 border-t-blue-500 glass-panel-hover reveal-element flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-lg bg-blue-950/80 border border-blue-800/60 text-blue-400 text-xs font-bold uppercase tracking-wider">
+                                    Əyani Hazırlıq
+                                </span>
+                                <span class="text-xs font-extrabold text-blue-300 bg-blue-500/10 px-2.5 py-1 rounded-full border border-blue-500/20">11-ci sinif</span>
+                            </div>
+
+                            <h3 class="font-display font-black text-2xl text-white tracking-tight mb-4">
+                                Əyani • 11-ci sinif
+                            </h3>
+
+                            <!-- Time slots -->
+                            <div class="space-y-3 mb-5">
+                                <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-blue-500/20">
+                                    <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-1">
+                                        <span><i class="fas fa-calendar-day text-blue-400 mr-1.5"></i>II, IV, VI günlər</span>
+                                        <span class="text-[10px] text-blue-400 font-bold uppercase bg-blue-950/70 px-2 py-0.5 rounded">1-ci Növbə</span>
+                                    </div>
+                                    <div class="font-display font-black text-2xl text-white tracking-tight">
+                                        10:00 - 12:00
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-blue-500/20">
+                                    <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-1">
+                                        <span><i class="fas fa-calendar-day text-blue-400 mr-1.5"></i>II, IV, VI günlər</span>
+                                        <span class="text-[10px] text-blue-400 font-bold uppercase bg-blue-950/70 px-2 py-0.5 rounded">2-ci Növbə</span>
+                                    </div>
+                                    <div class="font-display font-black text-2xl text-white tracking-tight">
+                                        13:00 - 15:00
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-slate-400 text-xs sm:text-sm mb-6 leading-relaxed">
+                                11-ci sinif abituriyentləri üçün intensiv qəbul proqramı, blok sınaqları və fərdi nəzarət.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-xs text-slate-300 font-medium">
+                                <i class="fas fa-location-dot text-blue-400 shrink-0"></i>
+                                <span class="truncate">S.C. Pişəvəri gimn. (Nərimanov)</span>
+                            </div>
+                            <button onclick="copyAddress('S.C. Pişəvəri adına humanitar fənlər gimnaziyası (Nərimanov metrosu yaxınlığı)')" class="text-xs text-blue-400 hover:text-blue-300 transition font-semibold p-1 shrink-0" title="Ünvanı Kopyala">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Əyani 10-cu sinif (Rose/Coral Accent) -->
+                    <div class="glass-panel p-6 sm:p-7 rounded-3xl border-t-4 border-t-rose-500 glass-panel-hover reveal-element flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-lg bg-rose-950/80 border border-rose-800/60 text-rose-400 text-xs font-bold uppercase tracking-wider">
+                                    Əyani Hazırlıq
+                                </span>
+                                <span class="text-xs font-extrabold text-rose-300 bg-rose-500/10 px-2.5 py-1 rounded-full border border-rose-500/20">10-cu sinif</span>
+                            </div>
+
+                            <h3 class="font-display font-black text-2xl text-white tracking-tight mb-4">
+                                Əyani • 10-cu sinif
+                            </h3>
+
+                            <!-- Time slots -->
+                            <div class="space-y-3 mb-5">
+                                <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-rose-500/20">
+                                    <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-1">
+                                        <span><i class="fas fa-calendar-day text-rose-400 mr-1.5"></i>I, III, V günlər</span>
+                                        <span class="text-[10px] text-rose-400 font-bold uppercase bg-rose-950/70 px-2 py-0.5 rounded">1-ci Növbə</span>
+                                    </div>
+                                    <div class="font-display font-black text-2xl text-white tracking-tight">
+                                        14:00 - 16:00
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-rose-500/20">
+                                    <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-1">
+                                        <span><i class="fas fa-calendar-day text-rose-400 mr-1.5"></i>II, IV, VI günlər</span>
+                                        <span class="text-[10px] text-rose-400 font-bold uppercase bg-rose-950/70 px-2 py-0.5 rounded">2-ci Növbə</span>
+                                    </div>
+                                    <div class="font-display font-black text-2xl text-white tracking-tight">
+                                        15:00 - 17:00
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-slate-400 text-xs sm:text-sm mb-6 leading-relaxed">
+                                10-cu siniflər üçün bünövrəli fizika tədrisi, qanunauyğunluqlar və məsələ həlli bacarıqları.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-xs text-slate-300 font-medium">
+                                <i class="fas fa-location-dot text-rose-400 shrink-0"></i>
+                                <span class="truncate">S.C. Pişəvəri gimn. (Nərimanov)</span>
+                            </div>
+                            <button onclick="copyAddress('S.C. Pişəvəri adına humanitar fənlər gimnaziyası (Nərimanov metrosu yaxınlığı)')" class="text-xs text-rose-400 hover:text-rose-300 transition font-semibold p-1 shrink-0" title="Ünvanı Kopyala">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Distant (Online) Qrup (Emerald Accent) -->
+                    <div class="glass-panel p-6 sm:p-7 rounded-3xl border-t-4 border-t-emerald-500 glass-panel-hover reveal-element md:col-span-2 lg:col-span-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-lg bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                                    Online Hazırlıq
+                                </span>
+                                <span class="text-xs font-extrabold text-emerald-300 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">Canlı Dərslər</span>
+                            </div>
+
+                            <h3 class="font-display font-black text-2xl text-white tracking-tight mb-4">
+                                Online (Distant)
+                            </h3>
+
+                            <!-- Time slots -->
+                            <div class="space-y-3 mb-5">
+                                <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-emerald-500/20">
+                                    <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-1">
+                                        <span><i class="fas fa-calendar-day text-emerald-400 mr-1.5"></i>II, IV, VI günlər</span>
+                                        <span class="text-[10px] text-emerald-400 font-bold uppercase bg-emerald-950/70 px-2 py-0.5 rounded">11-ci sinif</span>
+                                    </div>
+                                    <div class="font-display font-black text-2xl text-white tracking-tight">
+                                        18:00 - 20:00
+                                    </div>
+                                </div>
+
+                                <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-emerald-500/20">
+                                    <div class="flex items-center justify-between text-xs text-slate-400 font-semibold mb-1">
+                                        <span><i class="fas fa-calendar-day text-emerald-400 mr-1.5"></i>I, III, V günlər</span>
+                                        <span class="text-[10px] text-emerald-400 font-bold uppercase bg-emerald-950/70 px-2 py-0.5 rounded">10-cu sinif</span>
+                                    </div>
+                                    <div class="font-display font-black text-2xl text-white tracking-tight">
+                                        18:00 - 20:00
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="text-slate-400 text-xs sm:text-sm mb-6 leading-relaxed">
+                                Canlı interaktiv distant dərslər, sual-cavab, video dərslərin arxivi və PDF konspektlər.
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <div class="flex items-center gap-2 text-xs text-slate-300 font-medium">
+                                <i class="fas fa-laptop text-emerald-400 shrink-0"></i>
+                                <span>Zoom & Canlı Platforma</span>
+                            </div>
+                            <span class="text-[11px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/20">Aktiv</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Location & Quick Map Directions Info (New Location: S.C. Pişəvəri ad. humanitar fənlər gimnaziyası) -->
+                <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-blue-500/30 reveal-element flex flex-col lg:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                    <div class="absolute -right-16 -bottom-16 w-48 h-48 bg-blue-600/10 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left relative z-10">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl shrink-0">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1.5">
+                                <span class="px-2.5 py-0.5 rounded-full bg-blue-900/60 border border-blue-500/30 text-blue-300 text-[11px] font-bold uppercase tracking-wider">Yeni Hazırlıq Məkanı</span>
+                                <span class="inline-flex items-center gap-1 text-xs text-emerald-400 font-semibold">
+                                    <i class="fas fa-check-circle text-xs"></i>
+                                    <span>Nərimanov metrosu yaxınlığı</span>
+                                </span>
+                            </div>
+                            <h4 class="font-display font-black text-white text-lg sm:text-xl mb-1">
+                                S.C. Pişəvəri adına humanitar fənlər gimnaziyası
+                            </h4>
+                            <p class="text-slate-300 text-xs sm:text-sm max-w-xl">
+                                Əyani hazırlıqlarımız Nərimanov metrosunun yaxınlığında yerləşən gimnaziyanın rahat və müasir təchizatlı auditoriyalarında təşkil edilir.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto justify-center relative z-10">
+                        <button onclick="copyAddress('S.C. Pişəvəri adına humanitar fənlər gimnaziyası (Nərimanov metrosu yaxınlığı)')" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 text-xs sm:text-sm font-semibold transition border border-slate-700 flex items-center justify-center gap-2">
+                            <i class="fas fa-copy text-blue-400"></i>
+                            <span>Ünvanı Kopyala</span>
+                        </button>
+                        <a href="https://www.google.com/maps/search/?api=1&query=S.C.+Pi%C5%9F%C9%99v%C9%99ri+ad%C4%B1na+humanitar+f%C9%99nl%C9%99r+gimnaziyas%C4%B1+Bak%C4%B1" target="_blank" class="px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-blue-900/40">
+                            <i class="fas fa-location-arrow"></i>
+                            <span>Google Xəritədə Aç</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==============================================
+             QEYDİYYAT & SÜRƏTLİ MÜRACİƏT FORMU
+             ============================================== -->
+        <section id="qeydiyyat" class="py-20 px-4 sm:px-6 relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-blue-500/30 relative overflow-hidden reveal-element">
+                    <div class="absolute -top-24 -left-24 w-60 h-60 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="text-center max-w-xl mx-auto mb-10">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/40 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-3">
+                            <i class="fas fa-user-plus text-xs"></i>
+                            <span>Sürətli Qeydiyyat</span>
+                        </div>
+                        <h2 class="font-display font-black text-3xl sm:text-4xl text-white tracking-tight mb-3">
+                            Hazırlığa Yazılın
+                        </h2>
+                        <p class="text-slate-400 text-sm">
+                            Məlumatlarınızı qeyd edin, dərslər və qruplar haqqında ətraflı məlumat üçün sizinlə əlaqə saxlayaq.
+                        </p>
+                    </div>
+
+                    <form id="lead-form" onsubmit="handleRegistrationSubmit(event)" class="space-y-4 sm:space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="student-name" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Ad və Soyadınız</label>
+                                <input type="text" id="student-name" required placeholder="məs: Əli Məmmədov" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition">
+                            </div>
+
+                            <div>
+                                <label for="student-phone" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Əlaqə Nömrəniz</label>
+                                <input type="tel" id="student-phone" required placeholder="050 123 45 67" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="student-class" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Hazırlıq İstiqaməti</label>
+                                <select id="student-class" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition">
+                                    <option value="Əyani • 11-ci sinif">Əyani • 11-ci sinif (Gimnaziya)</option>
+                                    <option value="Əyani • 10-cu sinif">Əyani • 10-cu sinif (Gimnaziya)</option>
+                                    <option value="Online • 11-ci sinif">Online • 11-ci sinif (Canlı Dərslər)</option>
+                                    <option value="Online • 10-cu sinif">Online • 10-cu sinif (Canlı Dərslər)</option>
+                                    <option value="MİQ və Sertifikasiya">MİQ / Sertifikasiya</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="student-time" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Uyğun Növbə və Saat</label>
+                                <select id="student-time" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition">
+                                    <option value="Əyani 11-ci sinif: II, IV, VI (10:00 - 12:00)">Əyani 11-ci sinif: II, IV, VI (10:00 - 12:00)</option>
+                                    <option value="Əyani 11-ci sinif: II, IV, VI (13:00 - 15:00)">Əyani 11-ci sinif: II, IV, VI (13:00 - 15:00)</option>
+                                    <option value="Əyani 10-cu sinif: I, III, V (14:00 - 16:00)">Əyani 10-cu sinif: I, III, V (14:00 - 16:00)</option>
+                                    <option value="Əyani 10-cu sinif: II, IV, VI (15:00 - 17:00)">Əyani 10-cu sinif: II, IV, VI (15:00 - 17:00)</option>
+                                    <option value="Online 11-ci sinif: II, IV, VI (18:00 - 20:00)">Online 11-ci sinif: II, IV, VI (18:00 - 20:00)</option>
+                                    <option value="Online 10-cu sinif: I, III, V (18:00 - 20:00)">Online 10-cu sinif: I, III, V (18:00 - 20:00)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-sm sm:text-base tracking-wide button-glow transition flex items-center justify-center gap-2">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>WhatsApp Vasitəsilə Müraciəti Tamamla</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SUALLAR SECTION (FAQ Accordion)
+             ============================================== -->
+        <section id="suallar" class="py-20 px-4 sm:px-6 relative">
+            <div class="max-w-3xl mx-auto">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-xl mx-auto mb-14 reveal-element">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-blue-400 text-xs font-bold uppercase tracking-wider mb-3">
+                        <i class="fas fa-circle-question text-xs"></i>
+                        <span>Məlumat Mərkəzi</span>
+                    </div>
+                    <h2 class="font-display font-black text-3xl sm:text-5xl text-white tracking-tight mb-4">
+                        Tez-Tez Verilən Suallar
+                    </h2>
+                    <p class="text-slate-400 text-sm sm:text-base">
+                        Dərslər, formatlar və qeydiyyat haqqında ən çox maraqlanılan sualların cavabları.
+                    </p>
+                </div>
+
+                <!-- Accordion Items -->
+                <div class="space-y-4 reveal-element">
+                    
+                    <!-- FAQ Item 1 (Updated with 2026-2027 online schedule) -->
+                    <div class="faq-item glass-panel rounded-2xl border border-slate-800 overflow-hidden transition-all duration-300">
+                        <button class="faq-toggle w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none" aria-expanded="true">
+                            <span class="font-display font-bold text-base sm:text-lg text-white">
+                                Distant (Online) Dərslər Keçirsiniz mi və Saatlar Necədir?
+                            </span>
+                            <div class="w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center text-blue-400 shrink-0 faq-icon transition-transform duration-300 rotate-180">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </button>
+                        <div class="faq-content px-5 pb-6 sm:px-6 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/40 pt-3">
+                            <p>Bəli, distant dərslərimiz canlı bağlantı ilə keçirilir. Yeni 2026-2027 cədvəlinə əsasən: 11-ci siniflər üçün II, IV, VI günlər saat 18:00 - 20:00, 10-cu siniflər üçün isə I, III, V günlər saat 18:00 - 20:00 radələrində təşkil olunur. Dərslərdə canlı sual-cavab aparılır, video qeydlər arxivləşdirilir və konspektlər tələbələrə ötürülür.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 (Updated with S.C. Pişəvəri gimnaziyası location) -->
+                    <div class="faq-item glass-panel rounded-2xl border border-slate-800 overflow-hidden transition-all duration-300">
+                        <button class="faq-toggle w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none" aria-expanded="false">
+                            <span class="font-display font-bold text-base sm:text-lg text-white">
+                                Əyani hazırlıq harada keçirilir?
+                            </span>
+                            <div class="w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center text-blue-400 shrink-0 faq-icon transition-transform duration-300">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </button>
+                        <div class="faq-content px-5 pb-6 sm:px-6 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/40 pt-3 hidden">
+                            <p>Əyani hazırlıqlarımız Nərimanov metrosunun yaxınlığında yerləşən S.C. Pişəvəri adına humanitar fənlər gimnaziyasında keçirilir. Auditoriyalarımız geniş, işıqlı və tədris üçün zəruri bütün müasir avadanlıqlarla təchiz olunub.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item glass-panel rounded-2xl border border-slate-800 overflow-hidden transition-all duration-300">
+                        <button class="faq-toggle w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none" aria-expanded="false">
+                            <span class="font-display font-bold text-base sm:text-lg text-white">
+                                Dərslər kimlər üçün nəzərdə tutulub?
+                            </span>
+                            <div class="w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center text-blue-400 shrink-0 faq-icon transition-transform duration-300">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </button>
+                        <div class="faq-content px-5 pb-6 sm:px-6 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/40 pt-3 hidden">
+                            <p>Dərslərimiz 9, 10, 11-ci sinif abituriyentləri (ali məktəbə qəbul imtahanlarına hazırlaşanlar), MİQ və Sertifikasiya imtahanlarına hazırlaşan müəllimlər və fizikaya sıfırdan dərindən yiyələnmək istəyən hər kəs üçün uyğundur.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item glass-panel rounded-2xl border border-slate-800 overflow-hidden transition-all duration-300">
+                        <button class="faq-toggle w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 focus:outline-none" aria-expanded="false">
+                            <span class="font-display font-bold text-base sm:text-lg text-white">
+                                Dərslərə necə yazılmaq olar?
+                            </span>
+                            <div class="w-8 h-8 rounded-full bg-slate-800/80 flex items-center justify-center text-blue-400 shrink-0 faq-icon transition-transform duration-300">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </button>
+                        <div class="faq-content px-5 pb-6 sm:px-6 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/40 pt-3 hidden">
+                            <p>Qeydiyyat üçün yuxarıdakı müraciət formasını doldura və ya birbaşa <a href="tel:+994702324141" class="text-blue-400 font-bold hover:underline">+994 70 232 41 41</a> nömrəsinə zəng edib və ya WhatsApp vasitəsilə yaza bilərsiniz.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Contact Actions Button (Mobile & Desktop) -->
+    <aside aria-label="Sürətli Əlaqə Menyu" class="fixed bottom-6 right-6 z-40 flex flex-col gap-2">
+        <a href="https://wa.me/994702324141?text=Salam,%20Suret%20müəllim.%20Fizika%20dərsləri%20haqqında%20məlumat%20istəyirəm." target="_blank" class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center shadow-2xl hover:scale-105 transition-transform duration-300" title="WhatsApp ilə Əlaqə">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
+    </aside>
+
+    <!-- ==============================================
+         MODERN FOOTER (Elaqe, Socials, & Developer Tag)
+         ============================================== -->
+    <footer id="elaqe" class="relative bg-slate-950 border-t border-slate-900 pt-16 pb-12 px-4 sm:px-6 z-10">
+        <div class="max-w-6xl mx-auto">
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-slate-900">
+                
+                <!-- Col 1: Brand & Bio -->
+                <div class="md:col-span-5 text-center md:text-left">
+                    <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
+                        <img src="logo.jpeg" alt="Logo" class="w-10 h-10 rounded-full object-cover border-2 border-blue-500/80">
+                        <div class="font-display font-black text-xl tracking-tight text-white">
+                            <span>SURET</span> <span class="text-blue-500">XƏLİLOV</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed max-w-sm mx-auto md:mx-0 mb-6">
+                        Azərbaycanın ən aktiv fizika tədris kanalı və hazırlıq mərkəzi. İllərin təcrübəsi və qəbul imtahanlarında ən yüksək nəticələr.
+                    </p>
+                    <div class="flex items-center justify-center md:justify-start gap-2">
+                        <a href="tel:+994702324141" class="text-lg sm:text-xl font-display font-extrabold text-white hover:text-blue-400 transition tracking-tight">
+                            +994 70 232 41 41
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links Navigation -->
+                <div class="md:col-span-3 text-center md:text-left">
+                    <h5 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Naviqasiya</h5>
+                    <ul class="space-y-2.5 text-sm font-medium">
+                        <li><a href="#haqqimda" class="text-slate-300 hover:text-blue-400 transition">Müəllim Haqqında</a></li>
+                        <li><a href="#dersler" class="text-slate-300 hover:text-blue-400 transition">Dərs Nümunələri</a></li>
+                        <li><a href="#hazirliq" class="text-slate-300 hover:text-blue-400 transition">Hazırlıq Vaxtları</a></li>
+                        <li><a href="#qeydiyyat" class="text-slate-300 hover:text-blue-400 transition">Qeydiyyat</a></li>
+                        <li><a href="#suallar" class="text-slate-300 hover:text-blue-400 transition">Tez-Tez Verilən Suallar</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Social Channels & Creator Credit -->
+                <div class="md:col-span-4 flex flex-col items-center md:items-end justify-between text-center md:text-right">
+                    <div>
+                        <h5 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Sosial Şəbəkələr</h5>
+                        <div class="flex items-center justify-center md:justify-end gap-3 mb-6">
+                            <a href="https://www.youtube.com/@FizikFS" target="_blank" class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-red-500 hover:border-red-500/40 transition" title="YouTube">
+                                <i class="fab fa-youtube text-lg"></i>
+                            </a>
+                            <a href="https://t.me/fizikfs" target="_blank" class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-sky-400 hover:border-sky-400/40 transition" title="Telegram">
+                                <i class="fab fa-telegram text-lg"></i>
+                            </a>
+                            <a href="https://instagram.com/fizikfs.suret_xelilov" target="_blank" class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-pink-500 hover:border-pink-500/40 transition" title="Instagram">
+                                <i class="fab fa-instagram text-lg"></i>
+                            </a>
+                            <a href="https://wa.me/994702324141" target="_blank" class="w-11 h-11 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-emerald-400 hover:border-emerald-400/40 transition" title="WhatsApp">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Developer Tag -->
+                    <div class="flex flex-col items-center md:items-end gap-2.5 pt-4">
+                        <p class="text-slate-400 text-xs sm:text-sm tracking-wide flex items-center gap-1.5 font-medium">
+                            <span>Developed with</span>
+                            <span class="text-red-500 text-sm animate-pulse">❤️</span>
+                            <span>by</span>
+                            <a href="https://aurahubs.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-blue-400 font-bold underline decoration-blue-500/40 hover:decoration-blue-400 underline-offset-4 transition font-display tracking-tight">aurahubs.com</a>
+                        </p>
+                        <a href="https://wa.me/994513450705?text=Salam,%20vebsayt%20sifarişi%20üçün%20yazıram." target="_blank" class="inline-flex items-center gap-2 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white font-bold py-2 px-4 rounded-xl border border-emerald-500/30 transition text-xs uppercase tracking-wider">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Vebsayt Sifarişi</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Sub-footer -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                <p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">
+                    © 2026 Fizik FS. Bütün hüquqlar qorunur.
+                </p>
+                <p class="text-slate-600 text-xs">
+                    Suret Xəlilov | Fizik FS rəsmi veb platforması
+                </p>
+            </div>
+
         </div>
     </footer>
 
+    <!-- Interactive Scripting -->
+    <script>
+        // -------------------------------------------------------------
+        // Particle Physics Canvas Background
+        // -------------------------------------------------------------
+        (function initPhysicsCanvas() {
+            const canvas = document.getElementById('physics-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = Math.min(Math.floor((width * height) / 18000), 55);
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    radius: Math.random() * 1.8 + 0.8,
+                    alpha: Math.random() * 0.4 + 0.2
+                });
+            }
+
+            function animateCanvas() {
+                ctx.clearRect(0, 0, width, height);
+                const isLight = document.documentElement.classList.contains('light');
+
+                // Draw connections
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 110) {
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = isLight 
+                                ? `rgba(37, 99, 235, ${0.2 * (1 - dist / 110)})`
+                                : `rgba(59, 130, 246, ${0.12 * (1 - dist / 110)})`;
+                            ctx.lineWidth = 0.8;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // Draw and update particles
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = isLight
+                        ? `rgba(37, 99, 235, ${p.alpha * 0.75})`
+                        : `rgba(96, 165, 250, ${p.alpha})`;
+                    ctx.fill();
+                }
+
+                requestAnimationFrame(animateCanvas);
+            }
+
+            animateCanvas();
+        })();
+
+        // -------------------------------------------------------------
+        // Animated Metric Counters
+        // -------------------------------------------------------------
+        (function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            let hasAnimated = false;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasAnimated) {
+                        hasAnimated = true;
+                        counters.forEach(counter => {
+                            const target = +counter.getAttribute('data-target');
+                            const duration = 1600;
+                            const startTime = performance.now();
+
+                            function updateCount(currentTime) {
+                                const elapsed = currentTime - startTime;
+                                const progress = Math.min(elapsed / duration, 1);
+                                // Ease-out quad formula
+                                const easeProgress = 1 - (1 - progress) * (1 - progress);
+                                const currentVal = Math.floor(easeProgress * target);
+                                counter.innerText = currentVal;
+
+                                if (progress < 1) {
+                                    requestAnimationFrame(updateCount);
+                                } else {
+                                    counter.innerText = target;
+                                }
+                            }
+                            requestAnimationFrame(updateCount);
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            counters.forEach(counter => observer.observe(counter));
+        })();
+
+        // -------------------------------------------------------------
+        // Scroll Reveal Animations
+        // -------------------------------------------------------------
+        (function initScrollReveal() {
+            const reveals = document.querySelectorAll('.reveal-element');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            reveals.forEach(el => observer.observe(el));
+        })();
+
+        // -------------------------------------------------------------
+        // Mobile Navigation Toggle
+        // -------------------------------------------------------------
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                const isExpanded = !mobileMenu.classList.contains('hidden');
+                if (isExpanded) {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                } else {
+                    mobileMenu.classList.remove('hidden');
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                }
+            });
+
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+        }
+
+        // -------------------------------------------------------------
+        // Video Modal Handler
+        // -------------------------------------------------------------
+        const videoModal = document.getElementById('video-modal');
+        const videoModalContent = document.getElementById('video-modal-content');
+        const videoFrame = document.getElementById('video-frame');
+        const modalTitle = document.getElementById('modal-video-title');
+        const modalExternalLink = document.getElementById('modal-external-link');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+
+        function openVideoModal(videoId, title) {
+            if (!videoModal || !videoFrame) return;
+            videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+            modalTitle.innerText = title || 'Video Dərs';
+            modalExternalLink.href = `https://www.youtube.com/watch?v=${videoId}`;
+            
+            videoModal.classList.remove('hidden');
+            setTimeout(() => {
+                videoModal.classList.remove('opacity-0');
+                videoModalContent.classList.remove('scale-95');
+                videoModalContent.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            if (!videoModal) return;
+            videoModal.classList.add('opacity-0');
+            videoModalContent.classList.remove('scale-100');
+            videoModalContent.classList.add('scale-95');
+            setTimeout(() => {
+                videoFrame.src = '';
+                videoModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        document.querySelectorAll('.video-trigger').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const videoId = trigger.getAttribute('data-video-id');
+                const title = trigger.getAttribute('data-video-title');
+                openVideoModal(videoId, title);
+            });
+        });
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeVideoModal);
+        }
+
+        if (videoModal) {
+            videoModal.addEventListener('click', (e) => {
+                if (e.target === videoModal) closeVideoModal();
+            });
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal && !videoModal.classList.contains('hidden')) {
+                closeVideoModal();
+            }
+        });
+
+        // -------------------------------------------------------------
+        // FAQ Accordion Toggle
+        // -------------------------------------------------------------
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('.faq-icon');
+
+                // Collapse all items
+                document.querySelectorAll('.faq-toggle').forEach(otherBtn => {
+                    otherBtn.setAttribute('aria-expanded', 'false');
+                    otherBtn.nextElementSibling.classList.add('hidden');
+                    const otherIcon = otherBtn.querySelector('.faq-icon');
+                    if (otherIcon) otherIcon.classList.remove('rotate-180');
+                });
+
+                // Toggle current
+                if (!isExpanded) {
+                    button.setAttribute('aria-expanded', 'true');
+                    content.classList.remove('hidden');
+                    if (icon) icon.classList.add('rotate-180');
+                }
+            });
+        });
+
+        // -------------------------------------------------------------
+        // Copy Address Toast
+        // -------------------------------------------------------------
+        function copyAddress(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                const toastMsg = document.getElementById('toast-message');
+                if (toast && toastMsg) {
+                    toastMsg.innerText = `Ünvan kopyalandı: ${text}`;
+                    toast.classList.remove('translate-y-20', 'opacity-0');
+                    setTimeout(() => {
+                        toast.classList.add('translate-y-20', 'opacity-0');
+                    }, 3000);
+                }
+            }).catch(() => {
+                alert(`Ünvan: ${text}`);
+            });
+        }
+
+        // -------------------------------------------------------------
+        // Lead Form to WhatsApp Handler
+        // -------------------------------------------------------------
+        function handleRegistrationSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('student-name').value.trim();
+            const phone = document.getElementById('student-phone').value.trim();
+            const studentClass = document.getElementById('student-class').value;
+            const timePref = document.getElementById('student-time').value;
+
+            const text = `Salam, Suret müəllim. Fizika hazırlığı üçün müraciət edirəm:%0A- *Ad və Soyad:* ${encodeURIComponent(name)}%0A- *Telefon:* ${encodeURIComponent(phone)}%0A- *İstiqamət:* ${encodeURIComponent(studentClass)}%0A- *Uyğun Vaxt:* ${encodeURIComponent(timePref)}`;
+            
+            const whatsappUrl = `https://wa.me/994702324141?text=${text}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // -------------------------------------------------------------
+        // Light / Dark Theme Mode Controller
+        // -------------------------------------------------------------
+        (function initThemeManager() {
+            const toggleBtn = document.getElementById('theme-toggle');
+            const toggleIcon = document.getElementById('theme-toggle-icon');
+            const toggleText = document.getElementById('theme-toggle-text');
+
+            const toggleMobileBtn = document.getElementById('theme-toggle-mobile');
+            const toggleMobileIcon = document.getElementById('theme-icon-mobile');
+            const toggleMobileText = document.getElementById('theme-text-mobile');
+
+            function updateUI(theme) {
+                const isLight = theme === 'light';
+
+                if (toggleIcon) {
+                    toggleIcon.className = isLight ? 'fas fa-moon text-blue-600 text-sm' : 'fas fa-sun text-amber-400 text-sm';
+                }
+                if (toggleText) {
+                    toggleText.textContent = isLight ? 'Açıq' : 'Qaranlıq';
+                    toggleText.className = isLight ? 'hidden sm:inline text-xs font-semibold text-slate-700' : 'hidden sm:inline text-xs font-semibold text-slate-300';
+                }
+
+                if (toggleMobileIcon) {
+                    toggleMobileIcon.className = isLight ? 'fas fa-moon text-blue-600' : 'fas fa-sun text-amber-400';
+                }
+                if (toggleMobileText) {
+                    toggleMobileText.textContent = isLight ? 'Qaranlıq Rejimə Keç' : 'Açıq Rejimə Keç';
+                }
+
+                if (toggleBtn) {
+                    toggleBtn.setAttribute('title', isLight ? 'Qaranlıq rejimə keç' : 'Açıq rejimə keç');
+                }
+            }
+
+            function setTheme(theme) {
+                if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                    try { localStorage.setItem('fizikfs_theme', 'light'); } catch(e) {}
+                } else {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
+                    try { localStorage.setItem('fizikfs_theme', 'dark'); } catch(e) {}
+                }
+                updateUI(theme);
+            }
+
+            // Sync with current initial class
+            const currentTheme = document.documentElement.classList.contains('light') ? 'light' : 'dark';
+            updateUI(currentTheme);
+
+            function handleToggle() {
+                const isLight = document.documentElement.classList.contains('light');
+                const targetTheme = isLight ? 'dark' : 'light';
+                setTheme(targetTheme);
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', handleToggle);
+            }
+            if (toggleMobileBtn) {
+                toggleMobileBtn.addEventListener('click', handleToggle);
+            }
+        })();
+    </script>
 </body>
 </html>
-
-
