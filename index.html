@@ -70,14 +70,17 @@
             color-scheme: dark;
         }
 
-        body {
+        html, body {
             background-color: #060913;
             color: #f8fafc;
             font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+            touch-action: manipulation;
             selection-background-color: #3b82f6;
             selection-color: #ffffff;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.25s ease, color 0.25s ease;
         }
 
         ::selection {
@@ -85,45 +88,71 @@
             color: #ffffff;
         }
 
-        /* Smooth theme transitions */
-        .glass-panel, header nav, input, select, footer, .faq-item, .teacher-frame {
-            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        /* Performance boost for offscreen DOM sections */
+        .content-visibility-auto {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 750px;
         }
 
-        /* Subtle grid and glows */
+        /* Smooth theme transitions without layout thrashing */
+        .glass-panel, header nav, input, select, footer, .faq-item, .teacher-frame {
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        /* Subtle grid and ambient lighting */
         .bg-grid-pattern {
             background-size: 44px 44px;
             background-image: 
                 linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            transition: opacity 0.3s ease;
         }
 
         .radial-ambient {
-            background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.18), transparent 70%);
+            background: radial-gradient(circle at 50% -20%, rgba(59, 130, 246, 0.16), transparent 70%);
+            transform: translateZ(0);
         }
 
         .radial-ambient-bottom {
-            background: radial-gradient(circle at 50% 120%, rgba(37, 99, 235, 0.12), transparent 60%);
+            background: radial-gradient(circle at 50% 120%, rgba(37, 99, 235, 0.10), transparent 60%);
+            transform: translateZ(0);
         }
 
-        /* Glassmorphic card styling */
+        /* Glassmorphic card styling (Optimized blur) */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .glass-panel-hover {
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+            will-change: transform;
         }
 
         .glass-panel-hover:hover {
-            background: rgba(21, 33, 59, 0.75);
-            border-color: rgba(96, 165, 250, 0.35);
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -15px rgba(2, 6, 23, 0.8), 0 0 25px rgba(59, 130, 246, 0.15);
+            background: rgba(21, 33, 59, 0.82);
+            border-color: rgba(96, 165, 250, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px -12px rgba(2, 6, 23, 0.8), 0 0 20px rgba(59, 130, 246, 0.12);
+        }
+
+        /* Mobile Performance: Remove heavy backdrop blur and radial compositing to guarantee smooth 60-120fps scrolling */
+        @media (max-width: 768px) {
+            .glass-panel {
+                backdrop-filter: blur(4px) !important;
+                -webkit-backdrop-filter: blur(4px) !important;
+                background: rgba(15, 23, 42, 0.94) !important;
+            }
+            .radial-ambient, .radial-ambient-bottom {
+                display: none !important;
+            }
+            .animate-float {
+                animation: none !important;
+            }
+            .glass-panel-hover:hover {
+                transform: none !important;
+            }
         }
 
         /* Gradient text */
@@ -494,7 +523,10 @@
                 <!-- Brand Logo & Teacher Info -->
                 <a href="#haqqimda" class="flex items-center gap-3 group">
                     <div class="relative">
-                        <img src="logo.jpeg" alt="Fizik FS Logo" class="w-10 h-10 rounded-full object-cover border-2 border-blue-500/80 shadow-md group-hover:scale-105 transition-transform duration-300">
+                        <picture>
+                            <source srcset="logo.webp" type="image/webp">
+                            <img src="logo.jpeg" alt="Fizik FS Logo" width="40" height="40" decoding="async" class="w-10 h-10 rounded-full object-cover border-2 border-blue-500/80 shadow-md group-hover:scale-105 transition-transform duration-300">
+                        </picture>
                         <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-2 border-slate-950"></span>
                     </div>
                     <div class="flex flex-col">
@@ -511,6 +543,11 @@
                     <a href="#haqqimda" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Haqqımda</a>
                     <a href="#dersler" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Dərslər</a>
                     <a href="#hazirliq" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Hazırlıq</a>
+                    <a href="mehsullar.html" class="px-3.5 py-2 text-xs lg:text-sm font-bold text-blue-400 hover:text-white hover:bg-blue-600/20 border border-blue-500/30 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+                        <i class="fas fa-bag-shopping text-xs"></i>
+                        <span>Məhsullar</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
+                    </a>
                     <a href="#suallar" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Suallar</a>
                     <a href="#qeydiyyat" class="px-3.5 py-2 text-xs lg:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-xl transition">Qeydiyyat</a>
                 </div>
@@ -549,6 +586,13 @@
                     <a href="#hazirliq" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800/60 transition">
                         <span>Hazırlıq Vaxtları</span>
                         <i class="fas fa-chevron-right text-xs text-slate-500"></i>
+                    </a>
+                    <a href="mehsullar.html" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-sm font-bold text-blue-400 bg-blue-950/40 border border-blue-500/30 hover:bg-blue-900/40 transition">
+                        <div class="flex items-center gap-2.5">
+                            <i class="fas fa-bag-shopping text-blue-400"></i>
+                            <span>Məhsullar (Rəsmi Sweatshirt)</span>
+                        </div>
+                        <i class="fas fa-arrow-right text-xs text-blue-400"></i>
                     </a>
                     <a href="#qeydiyyat" class="mobile-nav-link flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800/60 transition">
                         <span>Qeydiyyat & Müraciət</span>
@@ -599,7 +643,10 @@
                             
                             <!-- Main Portrait Frame -->
                             <div class="teacher-frame relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-blue-500/30">
-                                <img src="suret_muellim.jpg" alt="Suret Xəlilov" class="w-full aspect-[4/5] object-cover object-center">
+                                <picture>
+                                    <source srcset="suret_muellim.webp" type="image/webp">
+                                    <img src="suret_muellim.jpg" alt="Suret Xəlilov" width="720" height="900" fetchpriority="high" decoding="async" class="w-full aspect-[4/5] object-cover object-center">
+                                </picture>
                                 
                                 <!-- Floating Verified Badge -->
                                 <div class="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 glass-panel p-2.5 sm:p-3.5 rounded-2xl border border-white/10 shadow-xl flex items-center gap-2.5 sm:gap-3 backdrop-blur-xl">
@@ -698,7 +745,7 @@
         <!-- ==============================================
              DƏRSLƏR SECTION (Video Samples & Playlists)
              ============================================== -->
-        <section id="dersler" class="py-20 px-4 sm:px-6 relative">
+        <section id="dersler" class="py-20 px-4 sm:px-6 relative content-visibility-auto">
             <div class="max-w-6xl mx-auto">
                 
                 <!-- Section Header -->
@@ -723,7 +770,7 @@
                         <div>
                             <!-- Video Thumbnail Area with Play Button Trigger -->
                             <div class="relative aspect-video w-full overflow-hidden bg-slate-950 cursor-pointer video-trigger" data-video-id="YmiGz8TDKgw" data-video-title="Mexaniki Hərəkət | Sıfırdan Fizika Dərsləri">
-                                <img src="https://img.youtube.com/vi/YmiGz8TDKgw/maxresdefault.jpg" alt="Mexaniki Hərəkət" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" onerror="this.src='https://img.youtube.com/vi/YmiGz8TDKgw/hqdefault.jpg'">
+                                <img src="https://img.youtube.com/vi/YmiGz8TDKgw/maxresdefault.jpg" alt="Mexaniki Hərəkət" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" onerror="this.src='https://img.youtube.com/vi/YmiGz8TDKgw/hqdefault.jpg'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                                 
                                 <!-- Play Button Floating -->
@@ -772,7 +819,7 @@
                         <div>
                             <!-- Video Thumbnail Area with Play Button Trigger -->
                             <div class="relative aspect-video w-full overflow-hidden bg-slate-950 cursor-pointer video-trigger" data-video-id="ncxv_BYNzIg" data-video-title="Aerohidrostatika | Təzyiq və Arximed Qanunu">
-                                <img src="https://img.youtube.com/vi/ncxv_BYNzIg/maxresdefault.jpg" alt="Aerohidrostatika" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" onerror="this.src='https://img.youtube.com/vi/ncxv_BYNzIg/hqdefault.jpg'">
+                                <img src="https://img.youtube.com/vi/ncxv_BYNzIg/maxresdefault.jpg" alt="Aerohidrostatika" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" onerror="this.src='https://img.youtube.com/vi/ncxv_BYNzIg/hqdefault.jpg'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
                                 
                                 <!-- Play Button Floating -->
@@ -847,9 +894,153 @@
         </section>
 
         <!-- ==============================================
+             MƏHSULLAR SPOTLIGHT SECTION (Official Sweatshirt)
+             ============================================== -->
+        <section id="mehsullar-bolmesi" class="py-16 sm:py-20 px-4 sm:px-6 relative content-visibility-auto">
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Section Header -->
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+                    <div>
+                        <div class="text-xs font-bold uppercase tracking-wider text-blue-400 mb-1.5">Rəsmi Kolleksiya</div>
+                        <h2 class="font-display font-black text-2xl sm:text-4xl text-white tracking-tight">
+                            Fizik FS Geyim Kolleksiyası
+                        </h2>
+                    </div>
+
+                    <a href="mehsullar.html" class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-blue-400 hover:text-blue-300 transition shrink-0 group">
+                        <span>Bütün məhsullar</span>
+                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Modern Luxury Product Card (T-Shirt & Sweatshirt Interactive Showcase) -->
+                <div class="rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900/90 to-slate-950/90 backdrop-blur-2xl p-5 sm:p-8 lg:p-10 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -top-32 -left-32 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+                        
+                        <!-- Col 1: Clean Dual Image Showcase (Side-by-side with crisp styling) -->
+                        <div class="lg:col-span-7">
+                            <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                                
+                                <!-- Ön Tərəf (Front View) -->
+                                <div class="group relative rounded-2xl overflow-hidden bg-white/95 border border-slate-700/60 shadow-lg">
+                                    <div class="aspect-square flex items-center justify-center p-3 sm:p-4">
+                                        <picture>
+                                            <source id="spotlight-front-webp" srcset="assets/images/sweatshirt_on.webp" type="image/webp">
+                                            <img id="spotlight-front-img" src="assets/images/sweatshirt_on.jpg" alt="Fizik FS Geyim - Ön görünüş" width="500" height="500" loading="eager" decoding="async" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
+                                        </picture>
+                                    </div>
+                                    <span class="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 px-2.5 py-1 rounded-lg bg-slate-950/80 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold border border-white/10 shadow">
+                                        Ön Görünüş
+                                    </span>
+                                </div>
+
+                                <!-- Arxa Tərəf (Back View) -->
+                                <div class="group relative rounded-2xl overflow-hidden bg-white/95 border border-slate-700/60 shadow-lg">
+                                    <div class="aspect-square flex items-center justify-center p-3 sm:p-4">
+                                        <picture>
+                                            <source id="spotlight-back-webp" srcset="assets/images/sweatshirt_arxa.webp" type="image/webp">
+                                            <img id="spotlight-back-img" src="assets/images/sweatshirt_arxa.jpg" alt="Fizik FS Geyim - Arxa görünüş" width="500" height="500" loading="eager" decoding="async" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300">
+                                        </picture>
+                                    </div>
+                                    <span class="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 px-2.5 py-1 rounded-lg bg-slate-950/80 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold border border-white/10 shadow">
+                                        Arxa Görünüş
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Col 2: Product Information, Model Selector, Price, Sizes & WhatsApp CTA -->
+                        <div class="lg:col-span-5 flex flex-col justify-center">
+                            
+                            <!-- Model Selector Pills (T-Shirt vs Sweatshirt) -->
+                            <div class="mb-4">
+                                <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Model seçimi:</div>
+                                <div class="grid grid-cols-2 gap-2 p-1 rounded-2xl bg-slate-950/60 border border-slate-800">
+                                    <button type="button" id="model-btn-tshirt" onclick="setSpotlightModel('tshirt')" class="py-2 px-3 rounded-xl font-bold text-xs sm:text-sm text-center transition border border-transparent text-slate-400 hover:text-white">
+                                        T-Shirt · 29.99 ₼
+                                    </button>
+                                    <button type="button" id="model-btn-sweatshirt" onclick="setSpotlightModel('sweatshirt')" class="py-2 px-3 rounded-xl font-bold text-xs sm:text-sm text-center transition bg-blue-600 text-white shadow-md border border-blue-500">
+                                        Sweatshirt · 44.99 ₼
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 id="spotlight-product-title" class="font-display font-black text-2xl sm:text-3xl text-white tracking-tight mb-2">
+                                Fizik FS "Təsir = Əks Təsir" Sweatshirt
+                            </h3>
+
+                            <!-- Minimal Spec Tags (Zero text fluff) -->
+                            <div class="flex flex-wrap items-center gap-2 mb-5">
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60 text-slate-300 text-xs font-medium">100% Pambıq</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60 text-slate-300 text-xs font-medium">Unisex Oversize</span>
+                                <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60 text-slate-300 text-xs font-medium">Davamlı Çap</span>
+                            </div>
+
+                            <!-- Price Display -->
+                            <div class="mb-5 pb-5 border-b border-slate-800 flex items-baseline justify-between gap-4">
+                                <div>
+                                    <div class="text-[11px] uppercase tracking-wider text-slate-400 font-medium">Qiymət</div>
+                                    <div class="text-3xl sm:text-4xl font-black text-white tracking-tight font-display flex items-baseline gap-1.5">
+                                        <span id="spotlight-price">44.99</span>
+                                        <span class="text-lg font-bold text-blue-400">AZN</span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                        Stokda var
+                                    </span>
+                                    <div class="text-[11px] text-slate-400 mt-0.5">Bütün ölçülər hazır</div>
+                                </div>
+                            </div>
+
+                            <!-- Size Selector (XS up to 2XL) -->
+                            <div class="mb-5">
+                                <div class="flex items-center justify-between text-xs mb-2">
+                                    <span class="text-slate-300 font-medium">Ölçü seçimi:</span>
+                                    <span class="text-slate-400">Seçildi: <strong id="spotlight-selected-size-text" class="text-blue-400 font-bold">L</strong></span>
+                                </div>
+
+                                <div class="grid grid-cols-6 gap-2" id="spotlight-size-selector">
+                                    <button type="button" onclick="selectSpotlightSize('XS')" class="size-pill py-2 text-center rounded-xl font-bold text-xs border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-slate-500 hover:text-white transition">XS</button>
+                                    <button type="button" onclick="selectSpotlightSize('S')" class="size-pill py-2 text-center rounded-xl font-bold text-xs border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-slate-500 hover:text-white transition">S</button>
+                                    <button type="button" onclick="selectSpotlightSize('M')" class="size-pill py-2 text-center rounded-xl font-bold text-xs border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-slate-500 hover:text-white transition">M</button>
+                                    <button type="button" onclick="selectSpotlightSize('L')" class="size-pill py-2 text-center rounded-xl font-bold text-xs border-2 border-blue-500 bg-blue-600 text-white shadow-md transition">L</button>
+                                    <button type="button" onclick="selectSpotlightSize('XL')" class="size-pill py-2 text-center rounded-xl font-bold text-xs border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-slate-500 hover:text-white transition">XL</button>
+                                    <button type="button" onclick="selectSpotlightSize('2XL')" class="size-pill py-2 text-center rounded-xl font-bold text-xs border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-slate-500 hover:text-white transition">2XL</button>
+                                </div>
+                            </div>
+
+                            <!-- WhatsApp CTA Button -->
+                            <div class="space-y-2.5">
+                                <a id="spotlight-order-btn" href="https://wa.me/994702324141?text=Salam,%20Suret%20m%C3%BC%C9%99llim.%20Fizik%20FS%20sweatshirt-i%20(44.99%20AZN)%20sifari%C5%9F%20etm%C9%99k%20ist%C9%99yir%C9%99m.%20%C3%96l%C3%A7%C3%BC:%20L" target="_blank" class="w-full py-3.5 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-500/20 transition active:scale-[0.99]">
+                                    <i class="fab fa-whatsapp text-lg"></i>
+                                    <span id="spotlight-btn-label">WhatsApp ilə Sifariş Et · 44.99 AZN</span>
+                                </a>
+
+                                <div class="flex items-center justify-center gap-4 text-xs text-slate-400 pt-0.5">
+                                    <span class="flex items-center gap-1.5"><i class="fas fa-truck-fast text-slate-500"></i> Sürətli çatdırılma</span>
+                                    <span>·</span>
+                                    <span class="flex items-center gap-1.5"><i class="fas fa-arrows-rotate text-slate-500"></i> Ölçü dəyişimi zəmanəti</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==============================================
              HAZIRLIQ VAXTLARI SECTION (Schedules & Modalities)
              ============================================== -->
-        <section id="hazirliq" class="py-16 sm:py-20 px-4 sm:px-6 relative bg-slate-950/50">
+        <section id="hazirliq" class="py-16 sm:py-20 px-4 sm:px-6 relative bg-slate-950/50 content-visibility-auto">
             <div class="max-w-6xl mx-auto">
                 
                 <!-- Section Header -->
@@ -1071,7 +1262,7 @@
         <!-- ==============================================
              QEYDİYYAT & SÜRƏTLİ MÜRACİƏT FORMU
              ============================================== -->
-        <section id="qeydiyyat" class="py-20 px-4 sm:px-6 relative">
+        <section id="qeydiyyat" class="py-20 px-4 sm:px-6 relative content-visibility-auto">
             <div class="max-w-4xl mx-auto">
                 <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-blue-500/30 relative overflow-hidden reveal-element">
                     <div class="absolute -top-24 -left-24 w-60 h-60 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -1141,7 +1332,7 @@
         <!-- ==============================================
              SUALLAR SECTION (FAQ Accordion)
              ============================================== -->
-        <section id="suallar" class="py-20 px-4 sm:px-6 relative">
+        <section id="suallar" class="py-20 px-4 sm:px-6 relative content-visibility-auto">
             <div class="max-w-3xl mx-auto">
                 
                 <!-- Section Header -->
@@ -1238,7 +1429,7 @@
     <!-- ==============================================
          MODERN FOOTER (Elaqe, Socials, & Developer Tag)
          ============================================== -->
-    <footer id="elaqe" class="relative bg-slate-950 border-t border-slate-900 pt-16 pb-12 px-4 sm:px-6 z-10">
+    <footer id="elaqe" class="relative bg-slate-950 border-t border-slate-900 pt-16 pb-12 px-4 sm:px-6 z-10 content-visibility-auto">
         <div class="max-w-6xl mx-auto">
             
             <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-slate-900">
@@ -1246,7 +1437,10 @@
                 <!-- Col 1: Brand & Bio -->
                 <div class="md:col-span-5 text-center md:text-left">
                     <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
-                        <img src="logo.jpeg" alt="Logo" class="w-10 h-10 rounded-full object-cover border-2 border-blue-500/80">
+                        <picture>
+                            <source srcset="logo.webp" type="image/webp">
+                            <img src="logo.jpeg" alt="Logo" width="40" height="40" loading="lazy" decoding="async" class="w-10 h-10 rounded-full object-cover border-2 border-blue-500/80">
+                        </picture>
                         <div class="font-display font-black text-xl tracking-tight text-white">
                             <span>SURET</span> <span class="text-blue-500">XƏLİLOV</span>
                         </div>
@@ -1268,6 +1462,7 @@
                         <li><a href="#haqqimda" class="text-slate-300 hover:text-blue-400 transition">Müəllim Haqqında</a></li>
                         <li><a href="#dersler" class="text-slate-300 hover:text-blue-400 transition">Dərs Nümunələri</a></li>
                         <li><a href="#hazirliq" class="text-slate-300 hover:text-blue-400 transition">Hazırlıq Vaxtları</a></li>
+                        <li><a href="mehsullar.html" class="text-blue-400 font-semibold hover:text-blue-300 transition flex items-center justify-center md:justify-start gap-1.5"><i class="fas fa-bag-shopping text-xs"></i><span>Məhsullar</span></a></li>
                         <li><a href="#qeydiyyat" class="text-slate-300 hover:text-blue-400 transition">Qeydiyyat</a></li>
                         <li><a href="#suallar" class="text-slate-300 hover:text-blue-400 transition">Tez-Tez Verilən Suallar</a></li>
                     </ul>
@@ -1326,59 +1521,98 @@
     <!-- Interactive Scripting -->
     <script>
         // -------------------------------------------------------------
-        // Particle Physics Canvas Background
+        // Particle Physics Canvas Background (Optimized High-Performance)
         // -------------------------------------------------------------
         (function initPhysicsCanvas() {
             const canvas = document.getElementById('physics-canvas');
             if (!canvas) return;
-            const ctx = canvas.getContext('2d');
+
+            // PERFORMANCE: On mobile/tablet (<768px) or low-spec devices, disable canvas to ensure silky 60-120fps
+            const isMobile = window.innerWidth < 768 || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+            if (isMobile) {
+                canvas.style.display = 'none';
+                return;
+            }
+
+            const ctx = canvas.getContext('2d', { alpha: true });
             let width = canvas.width = window.innerWidth;
             let height = canvas.height = window.innerHeight;
 
+            // 24 particles is optimal for desktop (looks full & elegant without burning CPU)
+            const particleCount = 24;
             const particles = [];
-            const particleCount = Math.min(Math.floor((width * height) / 18000), 55);
 
+            let resizeTimer;
             window.addEventListener('resize', () => {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-            });
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                }, 150);
+            }, { passive: true });
 
             for (let i = 0; i < particleCount; i++) {
                 particles.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.4,
-                    vy: (Math.random() - 0.5) * 0.4,
-                    radius: Math.random() * 1.8 + 0.8,
-                    alpha: Math.random() * 0.4 + 0.2
+                    vx: (Math.random() - 0.5) * 0.35,
+                    vy: (Math.random() - 0.5) * 0.35,
+                    radius: Math.random() * 1.5 + 0.8
                 });
             }
 
+            let animationFrameId;
+            let isScrolling = false;
+            let scrollStopTimer;
+
+            // Pause calculations during active user scroll to preserve native 60-120fps scrolling
+            window.addEventListener('scroll', () => {
+                isScrolling = true;
+                clearTimeout(scrollStopTimer);
+                scrollStopTimer = setTimeout(() => { isScrolling = false; }, 80);
+            }, { passive: true });
+
+            // Pause rendering when tab is hidden / browser minimized
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    cancelAnimationFrame(animationFrameId);
+                } else {
+                    animationFrameId = requestAnimationFrame(animateCanvas);
+                }
+            });
+
             function animateCanvas() {
+                if (document.hidden) return;
+                animationFrameId = requestAnimationFrame(animateCanvas);
+                if (isScrolling) return; // Skip heavy canvas redraw during fast scroll
+
                 ctx.clearRect(0, 0, width, height);
                 const isLight = document.documentElement.classList.contains('light');
 
-                // Draw connections
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const dist = Math.sqrt(dx * dx + dy * dy);
+                // 1. BATCH ALL LINES IN SINGLE DRAW CALL (Zero Math.sqrt, no individual strokes)
+                ctx.beginPath();
+                ctx.lineWidth = 0.75;
+                ctx.strokeStyle = isLight ? 'rgba(37, 99, 235, 0.14)' : 'rgba(59, 130, 246, 0.12)';
 
-                        if (dist < 110) {
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.strokeStyle = isLight 
-                                ? `rgba(37, 99, 235, ${0.2 * (1 - dist / 110)})`
-                                : `rgba(59, 130, 246, ${0.12 * (1 - dist / 110)})`;
-                            ctx.lineWidth = 0.8;
-                            ctx.stroke();
+                for (let i = 0; i < particles.length; i++) {
+                    const pi = particles[i];
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const pj = particles[j];
+                        const dx = pi.x - pj.x;
+                        const dy = pi.y - pj.y;
+                        if (Math.abs(dx) < 100 && Math.abs(dy) < 100) {
+                            if (dx * dx + dy * dy < 10000) {
+                                ctx.moveTo(pi.x, pi.y);
+                                ctx.lineTo(pj.x, pj.y);
+                            }
                         }
                     }
                 }
+                ctx.stroke();
 
-                // Draw and update particles
+                // 2. BATCH ALL PARTICLES IN SINGLE FILL CALL
+                ctx.beginPath();
+                ctx.fillStyle = isLight ? 'rgba(37, 99, 235, 0.45)' : 'rgba(96, 165, 250, 0.45)';
                 for (let i = 0; i < particles.length; i++) {
                     const p = particles[i];
                     p.x += p.vx;
@@ -1387,22 +1621,17 @@
                     if (p.x < 0 || p.x > width) p.vx *= -1;
                     if (p.y < 0 || p.y > height) p.vy *= -1;
 
-                    ctx.beginPath();
+                    ctx.moveTo(p.x + p.radius, p.y);
                     ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = isLight
-                        ? `rgba(37, 99, 235, ${p.alpha * 0.75})`
-                        : `rgba(96, 165, 250, ${p.alpha})`;
-                    ctx.fill();
                 }
-
-                requestAnimationFrame(animateCanvas);
+                ctx.fill();
             }
 
-            animateCanvas();
+            animationFrameId = requestAnimationFrame(animateCanvas);
         })();
 
         // -------------------------------------------------------------
-        // Animated Metric Counters
+        // Animated Metric Counters (Unobserved after run)
         // -------------------------------------------------------------
         (function initCounters() {
             const counters = document.querySelectorAll('.counter');
@@ -1413,17 +1642,16 @@
                     if (entry.isIntersecting && !hasAnimated) {
                         hasAnimated = true;
                         counters.forEach(counter => {
+                            observer.unobserve(counter);
                             const target = +counter.getAttribute('data-target');
-                            const duration = 1600;
+                            const duration = 1400;
                             const startTime = performance.now();
 
                             function updateCount(currentTime) {
                                 const elapsed = currentTime - startTime;
                                 const progress = Math.min(elapsed / duration, 1);
-                                // Ease-out quad formula
                                 const easeProgress = 1 - (1 - progress) * (1 - progress);
-                                const currentVal = Math.floor(easeProgress * target);
-                                counter.innerText = currentVal;
+                                counter.innerText = Math.floor(easeProgress * target);
 
                                 if (progress < 1) {
                                     requestAnimationFrame(updateCount);
@@ -1435,13 +1663,13 @@
                         });
                     }
                 });
-            }, { threshold: 0.3 });
+            }, { threshold: 0.2 });
 
             counters.forEach(counter => observer.observe(counter));
         })();
 
         // -------------------------------------------------------------
-        // Scroll Reveal Animations
+        // Scroll Reveal Animations (Auto unobserved)
         // -------------------------------------------------------------
         (function initScrollReveal() {
             const reveals = document.querySelectorAll('.reveal-element');
@@ -1449,9 +1677,10 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target); // Unobserve to free CPU!
                     }
                 });
-            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+            }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
 
             reveals.forEach(el => observer.observe(el));
         })();
@@ -1674,6 +1903,92 @@
                 toggleMobileBtn.addEventListener('click', handleToggle);
             }
         })();
+
+        // -------------------------------------------------------------
+        // Spotlight Apparel Controller (T-Shirt / Sweatshirt & Sizes)
+        // -------------------------------------------------------------
+        let currentSpotlightModel = 'sweatshirt';
+        let currentSpotlightSize = 'L';
+
+        const APPAREL_DATA = {
+            tshirt: {
+                title: 'Fizik FS "4 Ünsür & Atom" T-Shirt',
+                price: '29.99',
+                typeLabel: 'T-Shirt',
+                frontWebp: 'assets/images/tshirt_on.webp',
+                frontImg: 'assets/images/tshirt_on.jpeg',
+                backWebp: 'assets/images/tshirt_arxa.webp',
+                backImg: 'assets/images/tshirt_arxa.jpeg'
+            },
+            sweatshirt: {
+                title: 'Fizik FS "Təsir = Əks Təsir" Sweatshirt',
+                price: '44.99',
+                typeLabel: 'Sweatshirt',
+                frontWebp: 'assets/images/sweatshirt_on.webp',
+                frontImg: 'assets/images/sweatshirt_on.jpg',
+                backWebp: 'assets/images/sweatshirt_arxa.webp',
+                backImg: 'assets/images/sweatshirt_arxa.jpg'
+            }
+        };
+
+        function setSpotlightModel(model) {
+            currentSpotlightModel = model;
+            const data = APPAREL_DATA[model];
+            const btnTshirt = document.getElementById('model-btn-tshirt');
+            const btnSweatshirt = document.getElementById('model-btn-sweatshirt');
+            const titleEl = document.getElementById('spotlight-product-title');
+            const priceEl = document.getElementById('spotlight-price');
+            const btnLabel = document.getElementById('spotlight-btn-label');
+
+            const frontWebp = document.getElementById('spotlight-front-webp');
+            const frontImg = document.getElementById('spotlight-front-img');
+            const backWebp = document.getElementById('spotlight-back-webp');
+            const backImg = document.getElementById('spotlight-back-img');
+
+            if (frontWebp) frontWebp.srcset = data.frontWebp;
+            if (frontImg) frontImg.src = data.frontImg;
+            if (backWebp) backWebp.srcset = data.backWebp;
+            if (backImg) backImg.src = data.backImg;
+
+            if (model === 'tshirt') {
+                if (btnTshirt) btnTshirt.className = 'py-2 px-3 rounded-xl font-bold text-xs sm:text-sm text-center transition bg-blue-600 text-white shadow-md border border-blue-500';
+                if (btnSweatshirt) btnSweatshirt.className = 'py-2 px-3 rounded-xl font-bold text-xs sm:text-sm text-center transition border border-transparent text-slate-400 hover:text-white';
+            } else {
+                if (btnSweatshirt) btnSweatshirt.className = 'py-2 px-3 rounded-xl font-bold text-xs sm:text-sm text-center transition bg-blue-600 text-white shadow-md border border-blue-500';
+                if (btnTshirt) btnTshirt.className = 'py-2 px-3 rounded-xl font-bold text-xs sm:text-sm text-center transition border border-transparent text-slate-400 hover:text-white';
+            }
+
+            if (titleEl) titleEl.innerText = data.title;
+            if (priceEl) priceEl.innerText = data.price;
+            if (btnLabel) btnLabel.innerText = `WhatsApp ilə Sifariş Et · ${data.price} AZN`;
+
+            updateSpotlightOrderUrl();
+        }
+
+        function selectSpotlightSize(size) {
+            currentSpotlightSize = size;
+            const pills = document.querySelectorAll('#spotlight-size-selector .size-pill');
+            pills.forEach(p => {
+                if (p.innerText.trim() === size) {
+                    p.className = 'size-pill py-2 text-center rounded-xl font-bold text-xs border-2 border-blue-500 bg-blue-600 text-white shadow-md transition';
+                } else {
+                    p.className = 'size-pill py-2 text-center rounded-xl font-bold text-xs border border-slate-700 bg-slate-800/80 text-slate-300 hover:border-slate-500 hover:text-white transition';
+                }
+            });
+            const label = document.getElementById('spotlight-selected-size-text');
+            if (label) label.innerText = size;
+
+            updateSpotlightOrderUrl();
+        }
+
+        function updateSpotlightOrderUrl() {
+            const data = APPAREL_DATA[currentSpotlightModel];
+            const orderBtn = document.getElementById('spotlight-order-btn');
+            if (orderBtn) {
+                const message = `Salam, Surət müəllim. ${data.title}-ini (${data.price} AZN, Ölçü: ${currentSpotlightSize}) sifariş etmək istəyirəm.`;
+                orderBtn.href = `https://wa.me/994702324141?text=${encodeURIComponent(message)}`;
+            }
+        }
     </script>
 </body>
 </html>
